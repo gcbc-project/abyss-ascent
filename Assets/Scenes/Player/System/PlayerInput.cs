@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 public class PlayerInput : MonoBehaviour
 {
     public event Action<Vector2> OnMoveEvent;
+    public event Action OnJumpEvent;
     public void OnMove(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Performed)
@@ -16,6 +17,14 @@ public class PlayerInput : MonoBehaviour
         {
             Vector2 direction = Vector2.zero;
             OnMoveEvent?.Invoke(direction);
+        }
+    }
+
+    public void OnJump(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+        {
+            OnJumpEvent?.Invoke();
         }
     }
 }
