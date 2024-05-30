@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody>();
         _camera = Camera.main;
-        PlayerManager.Instance.Player.Input.OnMoveEvent += OnMove;
+        PlayerManager.Instance.Player.Input.OnMoveInputEvent += OnMove;
     }
 
     private void FixedUpdate()
@@ -27,7 +27,11 @@ public class PlayerMovement : MonoBehaviour
     {
         // TODO: Speed를 Stat에서 가져오도록 수정
         float speed = 5;
-        if (_direction.magnitude < 0.5f) return;
+        if (_direction.magnitude < 0.1f)
+        {
+            _rigidbody.velocity = new Vector3(0, _rigidbody.velocity.y, 0);
+            return;
+        }
 
         Vector3 forward = _camera.transform.forward;
         Vector3 right = _camera.transform.right;
