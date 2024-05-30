@@ -1,7 +1,10 @@
+using System;
 using UnityEngine;
 
 public class PlayerJump : MonoBehaviour
 {
+    public event Action OnJumpEvent;
+
     private LayerMask _groundLayerMask;
     private Rigidbody _rigidbody;
     private float _radius = 0.1f;
@@ -9,7 +12,7 @@ public class PlayerJump : MonoBehaviour
     private void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
-        PlayerManager.Instance.Player.Input.OnJumpEvent += OnJump;
+        PlayerManager.Instance.Player.Input.OnJumpInputEvent += OnJump;
         _groundLayerMask = LayerMask.GetMask("Ground");
     }
 
@@ -20,6 +23,7 @@ public class PlayerJump : MonoBehaviour
             // TODO: Jump 관련 변수를 Stat에서 가져오도록 수정
             float jumpPower = 150f;
             _rigidbody.AddForce(Vector2.up * jumpPower, ForceMode.Impulse);
+            OnJumpEvent?.Invoke();
         }
     }
 
