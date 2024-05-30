@@ -2,34 +2,15 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private LayerMask _groundLayerMask;
     private Rigidbody _rigidbody;
     private Vector2 _direction;
-    private float _radius = 0.1f;
-    private float _offset = 0.5f;
+    private Camera _camera;
 
     private void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
+        _camera = Camera.main;
         PlayerManager.Instance.Player.Input.OnMoveEvent += OnMove;
-        PlayerManager.Instance.Player.Input.OnJumpEvent += OnJump;
-        _groundLayerMask = LayerMask.GetMask("Ground");
-    }
-
-    private void OnJump()
-    {
-        if (IsGrounded())
-        {
-            // TODO: Jump 관련 변수를 Stat에서 가져오도록 수정
-            float jumpPower = 150f;
-            _rigidbody.AddForce(Vector2.up * jumpPower, ForceMode.Impulse);
-        }
-    }
-
-
-    private void OnMove(Vector2 vector)
-    {
-        _direction = vector;
     }
 
     private void FixedUpdate()
@@ -37,27 +18,38 @@ public class PlayerMovement : MonoBehaviour
         Move();
     }
 
+    private void OnMove(Vector2 vector)
+    {
+        _direction = vector;
+    }
+
     private void Move()
     {
         // TODO: Speed를 Stat에서 가져오도록 수정
         float speed = 5;
+        if (_direction.magnitude < 0.5f) return;
 
-        Vector3 vector = transform.forward * _direction.y + transform.right * _direction.x;
-        vector *= speed;
-        vector.y = _rigidbody.velocity.y;
+        Vector3 forward = _camera.transform.forward;
+        Vector3 right = _camera.transform.right;
 
-        _rigidbody.velocity = vector;
-    }
+        forward.y = 0;
+        right.y = 0;
 
-    private bool IsGrounded()
-    {
-        Vector3 startPoint = transform.position + Vector3.up * _radius - new Vector3(0, _offset, 0);
-        Vector3 direction = -Vector3.up;
+        forward.Normalize();
+        right.Normalize();
 
-        if (Physics.SphereCast(startPoint, _radius, direction, out RaycastHit hit, _radius, _groundLayerMask))
+        Vector3 moveDirection = forward * _direction.y + right * _direction.x;
+        moveDirection *= speed;
+        moveDirection.y = _rigidbody.velocity.y;
+
+        _rigidbody.velocity = moveDirection;
+
+        if (moveDirection != Vector3.zero)
         {
-            return true;
+            Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
+            targetRotation = Quaternion.Euler(0, targetRotation.eulerAngles.y, 0);
+
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.fixedDeltaTime * 20);
         }
-        return false;
     }
 }
