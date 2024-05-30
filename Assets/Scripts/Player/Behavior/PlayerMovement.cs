@@ -25,8 +25,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void Move()
     {
-        // TODO: Speed를 Stat에서 가져오도록 수정
-        float speed = 5;
         if (_direction.magnitude < 0.1f)
         {
             _rigidbody.velocity = new Vector3(0, _rigidbody.velocity.y, 0);
@@ -43,7 +41,7 @@ public class PlayerMovement : MonoBehaviour
         right.Normalize();
 
         Vector3 moveDirection = forward * _direction.y + right * _direction.x;
-        moveDirection *= speed;
+        moveDirection *= PlayerManager.Instance.Player.Stat.CurrentStat.WalkSpeed;
         moveDirection.y = _rigidbody.velocity.y;
 
         _rigidbody.velocity = moveDirection;

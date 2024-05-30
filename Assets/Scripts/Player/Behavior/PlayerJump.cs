@@ -20,9 +20,7 @@ public class PlayerJump : MonoBehaviour
     {
         if (IsGrounded())
         {
-            // TODO: Jump 관련 변수를 Stat에서 가져오도록 수정
-            float jumpPower = 150f;
-            _rigidbody.AddForce(Vector2.up * jumpPower, ForceMode.Impulse);
+            _rigidbody.AddForce(Vector2.up * PlayerManager.Instance.Player.Stat.CurrentStat.JumpPower, ForceMode.Impulse);
             OnJumpEvent?.Invoke();
         }
     }
