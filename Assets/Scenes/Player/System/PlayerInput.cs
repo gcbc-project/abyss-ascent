@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 public class PlayerInput : MonoBehaviour
 {
     public event Action<Vector2> OnMoveEvent;
+    public event Action<Vector2> OnLookEvent;
     public event Action OnJumpEvent;
     public void OnMove(InputAction.CallbackContext context)
     {
@@ -26,5 +27,11 @@ public class PlayerInput : MonoBehaviour
         {
             OnJumpEvent?.Invoke();
         }
+    }
+
+    public void OnLook(InputAction.CallbackContext context)
+    {
+        Vector2 mouseDelta = context.ReadValue<Vector2>();
+        OnLookEvent?.Invoke(mouseDelta);
     }
 }
