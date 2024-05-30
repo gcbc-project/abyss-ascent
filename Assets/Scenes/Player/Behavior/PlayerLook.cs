@@ -13,7 +13,7 @@ public class PlayerLook : MonoBehaviour
     {
         _camera = Camera.main;
         Cursor.lockState = CursorLockMode.Locked;
-        PlayerManager.Instance.Player.Input.OnLookEvent += OnLook;
+        PlayerManager.Instance.Player.Input.OnLookInputEvent += OnLook;
     }
     private void LateUpdate()
     {

@@ -4,20 +4,20 @@ using UnityEngine.InputSystem;
 
 public class PlayerInput : MonoBehaviour
 {
-    public event Action<Vector2> OnMoveEvent;
-    public event Action<Vector2> OnLookEvent;
-    public event Action OnJumpEvent;
+    public event Action<Vector2> OnMoveInputEvent;
+    public event Action<Vector2> OnLookInputEvent;
+    public event Action OnJumpInputEvent;
     public void OnMove(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Performed)
         {
             Vector2 direction = context.ReadValue<Vector2>();
-            OnMoveEvent?.Invoke(direction);
+            OnMoveInputEvent?.Invoke(direction);
         }
         else if (context.phase == InputActionPhase.Canceled)
         {
             Vector2 direction = Vector2.zero;
-            OnMoveEvent?.Invoke(direction);
+            OnMoveInputEvent?.Invoke(direction);
         }
     }
 
@@ -25,13 +25,13 @@ public class PlayerInput : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Started)
         {
-            OnJumpEvent?.Invoke();
+            OnJumpInputEvent?.Invoke();
         }
     }
 
     public void OnLook(InputAction.CallbackContext context)
     {
         Vector2 mouseDelta = context.ReadValue<Vector2>();
-        OnLookEvent?.Invoke(mouseDelta);
+        OnLookInputEvent?.Invoke(mouseDelta);
     }
 }
