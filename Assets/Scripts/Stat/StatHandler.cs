@@ -6,7 +6,12 @@ public class StatHandler : MonoBehaviour
 {
     [SerializeField] private StatSO _baseStat;
     [HideInInspector] public StatSO CurrentStat;
-    private List<StatSO> _stats;
+    private List<StatSO> _stats = new List<StatSO>();
+
+    private void Awake()
+    {
+        UpdateStat();
+    }
 
     public void AddStat(StatSO stat)
     {
