@@ -1,11 +1,26 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item : MonoBehaviour
+public abstract class Item : MonoBehaviour
 {
-    public enum Type {Health, Stamina, Jumping};
-    public Type type;
     public int value;
 
+    private void Update()
+    {
+        transform.Rotate(Vector3.up * 10 *  Time.deltaTime);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.name == "Player")
+        {
+            UseItem(other);
+            gameObject.SetActive(false);
+        }
+    }
+
+    protected abstract void UseItem(Collider other);
+    
 }
