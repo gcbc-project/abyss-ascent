@@ -32,7 +32,7 @@ public class TestShoot : MonoBehaviour
         ProjectileObject pro = obj.GetComponent<ProjectileObject>();
         if(pro != null)
         {
-            pro.SetDirection(Player.position);
+            pro.SetDirection(Player.position - transform.position  );
         }
 
     }

@@ -21,6 +21,7 @@ public class ProjectileObject : MonoBehaviour, IProjectileObject
     
     public void SetDirection(Vector3 direction)
     {
+
         _direction = direction.normalized;
     }
 
@@ -36,7 +37,7 @@ public class ProjectileObject : MonoBehaviour, IProjectileObject
     {
         if(1 << other.gameObject.layer == _playerLayerMask)
         {
-            Debug.Log("Get Damaged");
+            other.GetComponent<Health>().Modify(-10);
         }
     }
     void DestoryProjectileObj()

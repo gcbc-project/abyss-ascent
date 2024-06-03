@@ -121,5 +121,5 @@ MonoBehaviour:
   ObjMoveSpeed: 5
   _playerLayerMask:
     serializedVersion: 2
-    m_Bits: 16
+    m_Bits: 1024
   player: {fileID: 0}
