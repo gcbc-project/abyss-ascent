@@ -7,6 +7,7 @@ public class PlayerInput : MonoBehaviour
     public event Action<Vector2> OnMoveInputEvent;
     public event Action<Vector2> OnLookInputEvent;
     public event Action OnJumpInputEvent;
+    public event Action OnInteractInputEvent;
     public void OnMove(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Performed)
@@ -23,6 +24,8 @@ public class PlayerInput : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
+        if (CameraManager.Instance.ViewType == ViewType.Top) return;
+
         if (context.phase == InputActionPhase.Started)
         {
             OnJumpInputEvent?.Invoke();
@@ -33,5 +36,13 @@ public class PlayerInput : MonoBehaviour
     {
         Vector2 mouseDelta = context.ReadValue<Vector2>();
         OnLookInputEvent?.Invoke(mouseDelta);
+    }
+
+    public void OnInteract(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+        {
+            OnInteractInputEvent?.Invoke();
+        }
     }
 }
