@@ -5,6 +5,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody _rigidbody;
     private Vector2 _direction;
     private Camera _camera;
+    private Vector3 _beforeDirection;
 
     private void Start()
     {
@@ -55,7 +56,20 @@ public class PlayerMovement : MonoBehaviour
         moveDirection *= PlayerManager.Instance.Player.Stat.CurrentStat.WalkSpeed;
         moveDirection.y = _rigidbody.velocity.y;
 
-        _rigidbody.velocity = moveDirection;
+        //_rigidbody.velocity = moveDirection;
+        if(moveDirection != Vector3.zero)
+        {
+            _rigidbody.velocity = moveDirection;
+            _beforeDirection = moveDirection;
+        }
+        else
+        {
+            if(moveDirection != _beforeDirection)
+            {
+                _rigidbody.velocity = moveDirection;
+                _beforeDirection = moveDirection;
+            }
+        }
 
         if (moveDirection != Vector3.zero)
         {
