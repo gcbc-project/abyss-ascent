@@ -4,5 +4,6 @@ using UnityEngine;
 
 public interface IProjectileObject
 {
-    
+    public float MoveSpeed { get; }
+    void SetDirection(Vector3 direction);
 }

@@ -5,9 +5,9 @@ using UnityEngine;
 public class MovingFloor : MonoBehaviour,IMovingObject
 {
     [SerializeField] MoveDir dir;
-    [SerializeField] float moveSpeed;
-    [SerializeField] float waitTime;
-    [SerializeField] float moveDistance;
+    [SerializeField] float _moveSpeed;
+    [SerializeField] float _waitTime;
+    [SerializeField] float _moveDistance;
     private Vector3 _startPosition;
     private Vector3 _endPosition;
     private bool _movingToEnd = true;
@@ -21,8 +21,8 @@ public class MovingFloor : MonoBehaviour,IMovingObject
 
     public Vector3 GetStartPosition() => _startPosition;
     public MoveDir Dir => dir;
-    public float GetMoveSpeed() => moveSpeed;
-    public float GetWaitTime() => waitTime;
+    public float GetMoveSpeed() => _moveSpeed;
+    public float GetWaitTime() => _waitTime;
 
     public Vector3 GetEndPosition() => _endPosition;
 
@@ -31,20 +31,20 @@ public class MovingFloor : MonoBehaviour,IMovingObject
     {
         switch(dir){
             case MoveDir.MoveToX:
-                _endPosition = _startPosition + new Vector3(moveDistance,0,0);
+                _endPosition = _startPosition + new Vector3(_moveDistance,0,0);
                 break;
             case MoveDir.MoveToY:
-                _endPosition = _startPosition + new Vector3(0, moveDistance, 0);
+                _endPosition = _startPosition + new Vector3(0, _moveDistance, 0);
                 break;
             case MoveDir.MoveToZ:
-                _endPosition = _startPosition + new Vector3(0, 0, moveDistance);
+                _endPosition = _startPosition + new Vector3(0, 0, _moveDistance);
                 break;
         }
     }
     
     public void Move(Vector3 targetPosition)
     {
-        transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, targetPosition, _moveSpeed * Time.deltaTime);
     }
 
     public bool IsAtPosition(Vector3 position)
@@ -62,7 +62,7 @@ public class MovingFloor : MonoBehaviour,IMovingObject
                 Move(targetPosition);
                 yield return null;
             }
-            yield return new WaitForSeconds(waitTime);
+            yield return new WaitForSeconds(_waitTime);
 
             _movingToEnd = !_movingToEnd;
         }

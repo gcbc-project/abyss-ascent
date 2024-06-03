@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class JumpingFloor : MonoBehaviour,IJumpingObject
 {
-    [SerializeField] float jumpForce;
-    [SerializeField] LayerMask playerLayer;
-    public float JumpForce => jumpForce;
+    [SerializeField] float _jumpForce;
+    [SerializeField] LayerMask _playerLayer;
+    public float JumpForce => _jumpForce;
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (1<<collision.gameObject.layer == playerLayer)
+        if (1<<collision.gameObject.layer == _playerLayer)
         {
-            collision.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            collision.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
         }
     }
 }
