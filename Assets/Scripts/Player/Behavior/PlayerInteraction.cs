@@ -1,13 +1,9 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerInteraction : MonoBehaviour
 {
-    private LayerMask _layerMask = LayerMask.GetMask("Interactable");
+    private LayerMask _layerMask;
     private IInteractable _interactable;
     private GameObject _interactingGameObject;
 
@@ -20,11 +16,12 @@ public class PlayerInteraction : MonoBehaviour
     private void Start()
     {
         _cam = Camera.main;   // Tag = MainCamera
+        _layerMask = LayerMask.GetMask("Interactable");
     }
 
     private void Update()
     {
-        if((Time.time - _lastInteractTime) > _coolTime)
+        if ((Time.time - _lastInteractTime) > _coolTime)
         {
             _lastInteractTime = Time.time;
 
@@ -37,14 +34,14 @@ public class PlayerInteraction : MonoBehaviour
                 {
                     _interactingGameObject = hitPoint.collider.gameObject;
                     _interactable = hitPoint.collider.GetComponent<IInteractable>();
-                    
+
                 }
             }
             else
             {
                 ClearInteraction();
             }
-        }  
+        }
     }
 
 
@@ -55,14 +52,14 @@ public class PlayerInteraction : MonoBehaviour
 
     }
 
-    public void OnInteractInput(InputAction.CallbackContext context)   //  »óÈ£ÀÛ¿ë ÀÌº¥Æ® E ¹öÆ°
+    public void OnInteractInput(InputAction.CallbackContext context)   //  ï¿½ï¿½È£ï¿½Û¿ï¿½ ï¿½Ìºï¿½Æ® E ï¿½ï¿½Æ°
     {
-        if(context.phase == InputActionPhase.Started && _interactable != null)
+        if (context.phase == InputActionPhase.Started && _interactable != null)
         {
             _interactable.OnInteract();
             _interactingGameObject = null;
             _interactable = null;
-            
+
         }
     }
 }
