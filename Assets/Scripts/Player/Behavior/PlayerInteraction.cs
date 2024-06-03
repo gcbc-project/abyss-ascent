@@ -17,6 +17,7 @@ public class PlayerInteraction : MonoBehaviour
     {
         _cam = Camera.main;   // Tag = MainCamera
         _layerMask = LayerMask.GetMask("Interactable");
+        PlayerManager.Instance.Player.Input.OnInteractInputEvent += OnInteract;
     }
 
     private void Update()
@@ -52,14 +53,13 @@ public class PlayerInteraction : MonoBehaviour
 
     }
 
-    public void OnInteractInput(InputAction.CallbackContext context)   //  ��ȣ�ۿ� �̺�Ʈ E ��ư
+    private void OnInteract()
     {
-        if (context.phase == InputActionPhase.Started && _interactable != null)
+        if (_interactable != null)
         {
             _interactable.OnInteract();
             _interactingGameObject = null;
             _interactable = null;
-
         }
     }
 }
