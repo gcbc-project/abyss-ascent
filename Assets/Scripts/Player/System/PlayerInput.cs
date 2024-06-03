@@ -4,23 +4,14 @@ using UnityEngine.InputSystem;
 
 public class PlayerInput : MonoBehaviour
 {
-    public enum ControlMode { ThirdPerson, TopView, SideScroller }
-    public ControlMode currentMode = ControlMode.ThirdPerson;
-
     public event Action<Vector2> OnMoveInputEvent;
+    public event Action<Vector2> OnLookInputEvent;
     public event Action OnJumpInputEvent;
-
     public void OnMove(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Performed)
         {
             Vector2 direction = context.ReadValue<Vector2>();
-
-            if (currentMode == ControlMode.SideScroller) //횡스크롤일때 위아래 방향키 비활성
-            {
-                direction.y = 0;
-            }
-
             OnMoveInputEvent?.Invoke(direction);
         }
         else if (context.phase == InputActionPhase.Canceled)
@@ -32,14 +23,17 @@ public class PlayerInput : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (currentMode == ControlMode.TopView) //탑뷰시점일때 점프 비활성
-        {
-            return;
-        }
+        if (CameraManager.Instance.ViewType == ViewType.Top) return;
 
         if (context.phase == InputActionPhase.Started)
         {
             OnJumpInputEvent?.Invoke();
         }
+    }
+
+    public void OnLook(InputAction.CallbackContext context)
+    {
+        Vector2 mouseDelta = context.ReadValue<Vector2>();
+        OnLookInputEvent?.Invoke(mouseDelta);
     }
 }
