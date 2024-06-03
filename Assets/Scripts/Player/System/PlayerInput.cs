@@ -23,6 +23,8 @@ public class PlayerInput : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
+        if (CameraManager.Instance.ViewType == ViewType.Top) return;
+
         if (context.phase == InputActionPhase.Started)
         {
             OnJumpInputEvent?.Invoke();
