@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class WallClimb : MonoBehaviour
@@ -8,7 +6,6 @@ public class WallClimb : MonoBehaviour
     public float wallCheckDistance = 0.5f;
     public float climbSpeed = 3f;
     public Animator animator;
-    private Vector2 _direction;
 
     private Rigidbody rb;
     private bool isClimbing = false;
@@ -65,12 +62,8 @@ public class WallClimb : MonoBehaviour
 
     public void ClimbWall()
     {
-        float vertical = Input.GetAxis("Vertical");
-        Vector3 climbDirection = new Vector3(0, vertical * climbSpeed * Time.deltaTime, 0);
+        Vector3 climbDirection = new Vector3(0, climbSpeed * Time.deltaTime, 0);
         transform.Translate(climbDirection);
     }
-    private void OnMove(Vector2 vector)
-    {
-        _direction = vector;
-    }
+
 }
