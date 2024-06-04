@@ -13,6 +13,6 @@ public class Door : MonoBehaviour, IInteractable
 
     public void OnInteract()
     {
-        this.transform.position = new Vector3(7f, 2.51f, 5f);
+        Debug.Log("도어와 상호 작용 합니다");
     }
 }

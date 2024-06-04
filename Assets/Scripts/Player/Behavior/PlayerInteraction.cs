@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerInteraction : MonoBehaviour
 {
@@ -9,39 +8,35 @@ public class PlayerInteraction : MonoBehaviour
 
     private float _coolTime = 0.05f;
     private float _lastInteractTime;
-    private float _maximumInteractDistance = 5f;
-
-    private Camera _cam;
 
     private void Start()
     {
-        _cam = Camera.main;   // Tag = MainCamera
         _layerMask = LayerMask.GetMask("Interactable");
         PlayerManager.Instance.Player.Input.OnInteractInputEvent += OnInteract;
     }
 
-    private void Update()
+    private void OnTriggerEnter(Collider other)
     {
         if ((Time.time - _lastInteractTime) > _coolTime)
         {
             _lastInteractTime = Time.time;
 
-            Ray ray = _cam.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
-            RaycastHit hitPoint;
-
-            if (Physics.Raycast(ray, out hitPoint, _maximumInteractDistance, _layerMask))
+            if (((1 << other.gameObject.layer) & _layerMask) != 0) // 비트 시프트 연산 (<<)
             {
-                if (hitPoint.collider.gameObject != _interactingGameObject)
+                if (other.gameObject != _interactingGameObject)
                 {
-                    _interactingGameObject = hitPoint.collider.gameObject;
-                    _interactable = hitPoint.collider.GetComponent<IInteractable>();
-
+                    _interactingGameObject = other.gameObject;
+                    _interactable = other.GetComponent<IInteractable>();
                 }
             }
-            else
-            {
-                ClearInteraction();
-            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject == _interactingGameObject)
+        {
+            ClearInteraction();
         }
     }
 
