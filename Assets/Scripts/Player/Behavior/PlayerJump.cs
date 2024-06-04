@@ -4,11 +4,15 @@ using UnityEngine;
 public class PlayerJump : MonoBehaviour
 {
     public event Action OnJumpEvent;
+    public event Action<bool> OnFallingEvent;
+    public event Action<bool> OnGroundedEvent;
 
     private LayerMask _groundLayerMask;
     private Rigidbody _rigidbody;
     private float _radius = 0.1f;
     private Stamina _stamina;
+    private bool _isFalling;
+    private bool _isGrounded;
 
     private void Start()
     {
@@ -16,6 +20,25 @@ public class PlayerJump : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
         PlayerManager.Instance.Player.Input.OnJumpInputEvent += OnJump;
         _groundLayerMask = LayerMask.GetMask("Ground");
+    }
+
+    private void Update()
+    {
+        bool wasFalling = _isFalling;
+        bool wasGrounded = _isGrounded;
+
+        _isFalling = !_isGrounded && _rigidbody.velocity.y < -0.5f;
+        _isGrounded = IsGrounded();
+
+        if (_isFalling != wasFalling)
+        {
+            OnFallingEvent?.Invoke(_isFalling);
+        }
+
+        if (_isGrounded != wasGrounded)
+        {
+            OnGroundedEvent?.Invoke(_isGrounded);
+        }
     }
 
     private void OnJump()
