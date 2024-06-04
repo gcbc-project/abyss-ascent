@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - ProjectileObj
+  - Item
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,7 @@ TagManager:
   - Player
   - 
   - 
-  - 
+  - Wall
   - 
   - 
   - 
