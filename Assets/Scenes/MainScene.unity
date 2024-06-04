@@ -18448,6 +18448,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value: 100
+  _stat: {fileID: 11400000, guid: 3d5aa8114b215f244bfc8e171d6dec02, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

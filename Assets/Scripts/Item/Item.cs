@@ -2,8 +2,6 @@ using UnityEngine;
 
 public abstract class Item : MonoBehaviour
 {
-    public int value;
-
     private void Update()
     {
         transform.Rotate(Vector3.up * 10 * Time.deltaTime);
@@ -19,5 +17,7 @@ public abstract class Item : MonoBehaviour
     }
 
     protected abstract void UseItem(Collider other);
+
+    protected abstract void EndEffect();
 
 }
