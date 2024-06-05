@@ -13,11 +13,10 @@ public class PlayerAnime : MonoBehaviour
     private void Start()
     {
         _animator = GetComponent<Animator>();
-        _playerJump = GetComponent<PlayerJump>();
         PlayerManager.Instance.Player.Input.OnMoveInputEvent += OnMove;
-        _playerJump.OnJumpEvent += OnJump;
-        _playerJump.OnFallingEvent += OnFalling;
-        _playerJump.OnGroundedEvent += OnGrounded;
+        PlayerManager.Instance.Player.Jump.OnJumpEvent += OnJump;
+        PlayerManager.Instance.Player.Jump.OnFallingEvent += OnFalling;
+        PlayerManager.Instance.Player.Jump.OnGroundedEvent += OnGrounded;
     }
 
     private void OnJump()

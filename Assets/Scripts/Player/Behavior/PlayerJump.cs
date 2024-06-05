@@ -18,8 +18,8 @@ public class PlayerJump : MonoBehaviour
     {
         _stamina = GetComponent<Stamina>();
         _rigidbody = GetComponent<Rigidbody>();
-        PlayerManager.Instance.Player.Input.OnJumpInputEvent += OnJump;
         _groundLayerMask = LayerMask.GetMask("Ground");
+        PlayerManager.Instance.Player.Input.OnJumpInputEvent += OnJump;
     }
 
     private void Update()
@@ -43,7 +43,7 @@ public class PlayerJump : MonoBehaviour
 
     private void OnJump()
     {
-        if (_stamina.Modify(-PlayerManager.Instance.Player.Stat.CurrentStat.JumpStaminaAmount) && IsGrounded())
+        if (!_isFalling && _isGrounded && _stamina.Modify(-PlayerManager.Instance.Player.Stat.CurrentStat.JumpStaminaAmount))
         {
             _rigidbody.AddForce(Vector2.up * PlayerManager.Instance.Player.Stat.CurrentStat.JumpPower, ForceMode.Impulse);
             OnJumpEvent?.Invoke();
