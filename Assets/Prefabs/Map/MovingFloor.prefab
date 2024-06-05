@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8440894076326153770}
   - component: {fileID: 8422475963838633098}
   - component: {fileID: 327669124855082032}
+  - component: {fileID: -2083021662077286776}
   m_Layer: 0
   m_Name: MovingFloor
   m_TagString: Untagged
@@ -97,6 +98,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dir: 1
-  moveSpeed: 5
-  waitTime: 1
-  moveDistance: 10
+  _moveSpeed: 0
+  _waitTime: 0
+  _moveDistance: 0
+--- !u!65 &-2083021662077286776
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2807000346506452347}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.082125, y: 0.5, z: 2.082125}
+  m_Center: {x: 0, y: 0.25, z: 0}

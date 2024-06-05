@@ -55,7 +55,7 @@ public class CameraManager : BaseSingleton<CameraManager>
         {
             case ViewType.Top:
                 targetPosition = new Vector3(_playerTransform.position.x, 6, _playerTransform.position.z - 1);
-                targetRotation = Quaternion.Euler(80, 0, 0);
+                targetRotation = Quaternion.Euler(70, 0, 0);
                 break;
             case ViewType.SideScrolling:
                 targetPosition = new Vector3(_playerTransform.position.x, 0.5f + _playerTransform.position.y, -10);
@@ -94,7 +94,7 @@ public class CameraManager : BaseSingleton<CameraManager>
 
         if (ViewType == ViewType.Top)
         {
-            _camera.transform.rotation = Quaternion.Euler(80, 0, 0);
+            _camera.transform.rotation = Quaternion.Euler(70, 0, 0);
             _camera.transform.position = new Vector3(_playerTransform.position.x, 6, _playerTransform.position.z - 1);
         }
         else if (ViewType == ViewType.SideScrolling)

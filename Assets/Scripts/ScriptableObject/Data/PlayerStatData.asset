@@ -18,5 +18,5 @@ MonoBehaviour:
   StaminaRegenAmount: 4
   WalkSpeed: 5
   JumpStaminaAmount: 20
-  JumpPower: 150
+  JumpPower: 500
   JumpNum: 1
