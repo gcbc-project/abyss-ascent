@@ -14,6 +14,6 @@ public class Letter : MonoBehaviour, IInteractable
     {
         // 예를들면 인벤에 템을 보관한다는 메서드를 넣는다던지
 
-        Destroy(gameObject);
+        Debug.Log("편지와 상호 작용 합니다");
     }
 }
