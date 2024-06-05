@@ -2,25 +2,26 @@ using UnityEngine;
 
 public class WallClimb : MonoBehaviour
 {
-    public LayerMask GroundLayer;
-    public float wallCheckDistance = 0.5f;
-    public float climbSpeed = 3f;
-    public Animator animator;
-
-    private Rigidbody rb;
-    private bool isClimbing = false;
+    private Animator _animator;
+    private Rigidbody _rigidbody;
+    private LayerMask _groundLayer;
+    private float _wallCheckDistance = 0.5f;
+    private float _climbSpeed = 3f;
+    private bool _isClimbing = false;
 
 
     public void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        _groundLayer = LayerMask.GetMask("Ground");
+        _animator = GetComponent<Animator>();
+        _rigidbody = GetComponent<Rigidbody>();
     }
 
     public void LateUpdate()
     {
         CheckForWall();
 
-        if (isClimbing)
+        if (_isClimbing)
         {
             ClimbWall();
         }
@@ -29,16 +30,16 @@ public class WallClimb : MonoBehaviour
     public void CheckForWall()
     {
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.forward, out hit, wallCheckDistance, GroundLayer))
+        if (Physics.Raycast(transform.position, transform.forward, out hit, _wallCheckDistance, _groundLayer))
         {
-            if (!isClimbing)
+            if (!_isClimbing)
             {
                 StartClimbing();
             }
         }
         else
         {
-            if (isClimbing)
+            if (_isClimbing)
             {
                 StopClimbing();
             }
@@ -47,22 +48,22 @@ public class WallClimb : MonoBehaviour
 
     public void StartClimbing()
     {
-        isClimbing = true;
-        rb.useGravity = false;
-        rb.velocity = Vector2.zero;
-        animator.SetBool("isClimbing", true);
+        _isClimbing = true;
+        _rigidbody.useGravity = false;
+        _rigidbody.velocity = Vector2.zero;
+        _animator.SetBool("isClimbing", true);
     }
 
     public void StopClimbing()
     {
-        isClimbing = false;
-        rb.useGravity = true;
-        animator.SetBool("isClimbing", false);
+        _isClimbing = false;
+        _rigidbody.useGravity = true;
+        _animator.SetBool("isClimbing", false);
     }
 
     public void ClimbWall()
     {
-        Vector3 climbDirection = new Vector3(0, climbSpeed * Time.deltaTime, 0);
+        Vector3 climbDirection = new Vector3(0, _climbSpeed * Time.deltaTime, 0);
         transform.Translate(climbDirection);
     }
 
