@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class PlayerAnime : MonoBehaviour
@@ -9,6 +8,7 @@ public class PlayerAnime : MonoBehaviour
     private readonly int _isFalling = Animator.StringToHash("isFalling");
     private readonly int _isGrounded = Animator.StringToHash("isGrounded");
     private readonly int _isDashing = Animator.StringToHash("isDashing");
+    private readonly int _isClimbing = Animator.StringToHash("isClimbing");
 
     private Animator _animator;
 
@@ -21,13 +21,29 @@ public class PlayerAnime : MonoBehaviour
         PlayerManager.Instance.Player.Jump.OnFallingEvent += OnFalling;
         PlayerManager.Instance.Player.Jump.OnGroundedEvent += OnGrounded;
         PlayerManager.Instance.Player.Dash.OnDashEvent += OnDash;
+        PlayerManager.Instance.Player.Climb.OnClimbEvent += OnClimb;
+        PlayerManager.Instance.Player.Climb.OnClimbingEvent += OnClimbing;
     }
 
+    private void OnClimbing(float magnitude)
+    {
+        if (magnitude < 0.01f)
+        {
+            _animator.speed = 0f;
+        }
+        else
+        {
+            _animator.speed = 1f;
+        }
+    }
+    private void OnClimb(bool isClimbing)
+    {
+        _animator.SetBool(_isClimbing, isClimbing);
+    }
     private void OnDash(bool isDashing)
     {
         _animator.SetBool(_isDashing, isDashing);
     }
-
     private void OnJump(bool isJumping, int jumpNum)
     {
         if (jumpNum > 1)
