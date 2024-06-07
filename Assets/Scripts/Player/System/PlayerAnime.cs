@@ -9,7 +9,6 @@ public class PlayerAnime : MonoBehaviour
     private readonly int _isFalling = Animator.StringToHash("isFalling");
     private readonly int _isGrounded = Animator.StringToHash("isGrounded");
     private readonly int _isDashing = Animator.StringToHash("isDashing");
-    private readonly int _dash = Animator.StringToHash("dash");
 
     private Animator _animator;
 
@@ -26,10 +25,6 @@ public class PlayerAnime : MonoBehaviour
 
     private void OnDash(bool isDashing)
     {
-        if (isDashing)
-        {
-            _animator.SetTrigger(_dash);
-        }
         _animator.SetBool(_isDashing, isDashing);
     }
 

@@ -22,4 +22,4 @@ MonoBehaviour:
   JumpNum: 2
   DashStaminaAmount: 20
   DashDuration: 0.2
-  DashDistance: 5
+  DashDistance: 3
