@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _resourceName: Letter
   _resourceDescription: LetterDescription
-  _resourceIcon: {fileID: -7511558181221131132, guid: 3d85efa72b1be994dacad3b55397e87f, type: 3}
+  _resourceIcon: {fileID: 21300000, guid: a114306f81893174297e5055c8b3c9c2, type: 3}
