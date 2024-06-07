@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -24,49 +22,49 @@ public class SceneChangeManager : MonoBehaviour
     }
 
     void Start()
-    {        
+    {
         SceneManager.LoadScene(GameScenes[1], LoadSceneMode.Additive);
     }
     private void Update()
     {
-        if(SceneIndex >= 2)
+        if (SceneIndex >= 2)
         {
-            DeactiveScene(SceneIndex-1);
+            DeactiveScene(SceneIndex - 1);
         }
     }
 
     public void DeactiveScene(int sceneIndex)
     {
         scene = SceneManager.GetSceneByName(GameScenes[sceneIndex]);
-        foreach(GameObject go in scene.GetRootGameObjects())
+        foreach (GameObject go in scene.GetRootGameObjects())
         {
             go.SetActive(false);
         }
-    } 
-    
+    }
+
     public void ActiveScene(string sceneName)
     {
         SceneIndex = CheckScene(sceneName);
-        scene = SceneManager.GetSceneByName(GameScenes[SceneIndex+2]);
+        scene = SceneManager.GetSceneByName(GameScenes[SceneIndex + 2]);
         if (scene.IsValid())
         {
-            //¾ÀÀÌ ÀÌ¹Ì È°¼ºÈ­ µÇ¾îÀÖÀ½
+            //ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ È°ï¿½ï¿½È­ ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½ï¿½
         }
         else
         {
             SceneManager.LoadScene(GameScenes[SceneIndex + 2], LoadSceneMode.Additive);
         }
-        
+
     }
 
     int CheckScene(string sceneName)
     {
-        for(int i = 0; i < GameScenes.Length; i++)
+        for (int i = 0; i < GameScenes.Length; i++)
         {
-            if(sceneName == GameScenes[i])
+            if (sceneName == GameScenes[i])
             {
                 return i;
-            }            
+            }
         }
         return -1;
     }

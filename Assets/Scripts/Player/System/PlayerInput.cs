@@ -38,7 +38,7 @@ public class PlayerInput : MonoBehaviour
 
     public void OnLook(InputAction.CallbackContext context)
     {
-        if (CameraManager.Instance._canLook)
+        if (CameraManager.Instance.CanLook)
         {
             Vector2 mouseDelta = context.ReadValue<Vector2>();
             OnLookInputEvent?.Invoke(mouseDelta);

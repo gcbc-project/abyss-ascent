@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Door : MonoBehaviour, IInteractable
@@ -12,6 +10,6 @@ public class Door : MonoBehaviour, IInteractable
 
     public void OnInteract()
     {
-        Debug.Log("»óÈ£ ÀÛ¿ë");
+        Debug.Log("ï¿½ï¿½È£ ï¿½Û¿ï¿½");
     }
 }
