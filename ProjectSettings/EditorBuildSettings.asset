@@ -4,5 +4,17 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Map/MapTest.unity
+    guid: 0bec4264edb83ee4e82a4bf2f57bb083
+  - enabled: 1
+    path: Assets/Scenes/Map/MapReMake.unity
+    guid: 2ca835672a2c703428c26a35d66c395f
+  - enabled: 1
+    path: Assets/Scenes/Map/ThirdViewMap.unity
+    guid: 4f402ada59bdd7b44893d345c0e936a0
+  - enabled: 1
+    path: Assets/Scenes/Map/Maze.unity
+    guid: 4fda49af7f8d13c4eba5f4b43e2ce794
   m_configObjects: {}
