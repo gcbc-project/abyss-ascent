@@ -8,6 +8,10 @@ public class PlayerInput : MonoBehaviour
     public event Action<Vector2> OnLookInputEvent;
     public event Action OnJumpInputEvent;
     public event Action OnInteractInputEvent;
+    public Action OnAddResource;
+    public Action Oninventory;
+    public event Action OnDashInputEvent;
+
     public void OnMove(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Performed)
@@ -34,8 +38,11 @@ public class PlayerInput : MonoBehaviour
 
     public void OnLook(InputAction.CallbackContext context)
     {
-        Vector2 mouseDelta = context.ReadValue<Vector2>();
-        OnLookInputEvent?.Invoke(mouseDelta);
+        if (CameraManager.Instance.CanLook)
+        {
+            Vector2 mouseDelta = context.ReadValue<Vector2>();
+            OnLookInputEvent?.Invoke(mouseDelta);
+        }
     }
 
     public void OnInteract(InputAction.CallbackContext context)
@@ -43,6 +50,23 @@ public class PlayerInput : MonoBehaviour
         if (context.phase == InputActionPhase.Started)
         {
             OnInteractInputEvent?.Invoke();
+        }
+    }
+
+    public void OnInventory(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+        {
+            Oninventory?.Invoke();
+            CameraManager.Instance.ToggleCursor();
+        }
+    }
+
+    public void OnDash(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+        {
+            OnDashInputEvent?.Invoke();
         }
     }
 }

@@ -1,11 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ObjectPoolManager : MonoBehaviour
 {
     public static ObjectPoolManager Instance { get; set; }
-    
+
     [System.Serializable]
     public class Pool
     {
@@ -18,7 +17,7 @@ public class ObjectPoolManager : MonoBehaviour
     private Dictionary<string, Queue<GameObject>> _poolDict;
     private void Awake()
     {
-        if(Instance == null)
+        if (Instance == null)
         {
             Instance = this;
         }
@@ -41,7 +40,7 @@ public class ObjectPoolManager : MonoBehaviour
         }
     }
 
-    public GameObject SpawnPool(string tag,Vector3 spawnPoint)
+    public GameObject SpawnPool(string tag, Vector3 spawnPoint)
     {
         if (!_poolDict.ContainsKey(tag))
         {
@@ -55,7 +54,7 @@ public class ObjectPoolManager : MonoBehaviour
         return obj;
     }
 
-    public void ReturnPool(string tag,GameObject obj)
+    public void ReturnPool(string tag, GameObject obj)
     {
         if (!_poolDict.ContainsKey(tag))
         {
@@ -65,7 +64,7 @@ public class ObjectPoolManager : MonoBehaviour
         _poolDict[tag].Enqueue(obj);
     }
 
-    private void AddPool(string tag, int size,GameObject prefap, Transform parent)
+    private void AddPool(string tag, int size, GameObject prefap, Transform parent)
     {
         if (_poolDict.ContainsKey(tag))
         {
@@ -74,7 +73,7 @@ public class ObjectPoolManager : MonoBehaviour
 
         Queue<GameObject> objPool = new Queue<GameObject>();
 
-        for(int i = 0; i < size; i++)
+        for (int i = 0; i < size; i++)
         {
             GameObject obj = Instantiate(prefap);
             obj.transform.SetParent(parent);

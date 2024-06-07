@@ -21,7 +21,7 @@ public class PlayerInteraction : MonoBehaviour
         {
             _lastInteractTime = Time.time;
 
-            if (((1 << other.gameObject.layer) & _layerMask) != 0) // ºñÆ® ½ÃÇÁÆ® ¿¬»ê (<<)
+            if (((1 << other.gameObject.layer) & _layerMask) != 0) // ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ (<<)
             {
                 if (other.gameObject != _interactingGameObject)
                 {

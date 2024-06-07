@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TestShoot : MonoBehaviour
@@ -21,18 +19,18 @@ public class TestShoot : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.P))
-        {           
+        {
             Shoot();
         }
     }
 
     void Shoot()
     {
-        GameObject obj = ObjectPoolManager.Instance.SpawnPool("ProjectileObj",transform.position);
+        GameObject obj = ObjectPoolManager.Instance.SpawnPool("ProjectileObj", transform.position);
         ProjectileObject pro = obj.GetComponent<ProjectileObject>();
-        if(pro != null)
+        if (pro != null)
         {
-            pro.SetDirection(Player.position - transform.position  );
+            pro.SetDirection(Player.position - transform.position);
         }
 
     }

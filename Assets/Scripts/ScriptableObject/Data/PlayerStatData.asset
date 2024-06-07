@@ -20,3 +20,7 @@ MonoBehaviour:
   JumpStaminaAmount: 20
   JumpPower: 150
   JumpNum: 1
+  DashStaminaAmount: 20
+  DashDuration: 0.2
+  DashDistance: 3
+  ClimbSpeed: 7

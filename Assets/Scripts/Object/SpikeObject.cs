@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SpikeObject : MonoBehaviour, IDamageObject
@@ -24,13 +23,13 @@ public class SpikeObject : MonoBehaviour, IDamageObject
         {
             _spikeAnim.SetTrigger("ShowSpike");
             yield return new WaitForSeconds(SpikeShowTime);
-        }     
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (1<< collision.gameObject.layer == PlayerLayerMask)
-        { 
+        if (1 << collision.gameObject.layer == PlayerLayerMask)
+        {
             _player = collision.gameObject;
             _isPlayerDamage = true;
         }
@@ -40,7 +39,7 @@ public class SpikeObject : MonoBehaviour, IDamageObject
     {
         if (_isPlayerDamage == true)
         {
-            _player.GetComponent<Health>().Modify(-SpikeDamage);            
+            _player.GetComponent<Health>().Modify(-SpikeDamage);
         }
         _isPlayerDamage = false;
     }
