@@ -889,9 +889,9 @@ Transform:
   m_GameObject: {fileID: 644744519}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 13.116829, y: -3.667266, z: -2.8496552}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 18.19, y: -3.667266, z: -2.8496552}
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 814613018}
   m_Father: {fileID: 911232515}
@@ -1699,6 +1699,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 878154517e0becd43a40de3f683fd353, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsNotGrounded: 0
 --- !u!114 &1494037589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1789,7 +1790,19 @@ MonoBehaviour:
     m_ActionId: 4a6ad478-f4ec-4949-b947-25eaaca51e34
     m_ActionName: Player/Look[/Mouse/delta]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1494037587}
+        m_TargetAssemblyTypeName: PlayerInput, Assembly-CSharp
+        m_MethodName: OnDash
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 7b2adf36-f231-4ef8-823c-4931010358de
     m_ActionName: Player/Dash[/Keyboard/leftShift]
   m_NeverAutoSwitchControlSchemes: 0
@@ -1910,9 +1923,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 447427bf9f9a7904494b47488f6acb18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dashDistance: 2
-  _dashDuration: 0.1
-  _dashCooldown: 1
 --- !u!1 &1565995830
 GameObject:
   m_ObjectHideFlags: 0
