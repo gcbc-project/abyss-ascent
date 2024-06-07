@@ -1556,6 +1556,7 @@ GameObject:
   - component: {fileID: 1494037580}
   - component: {fileID: 1494037579}
   - component: {fileID: 1494037578}
+  - component: {fileID: 1494037595}
   - component: {fileID: 1494037594}
   m_Layer: 10
   m_Name: Player
@@ -1698,6 +1699,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 878154517e0becd43a40de3f683fd353, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsNotGrounded: 0
 --- !u!114 &1494037589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1787,6 +1789,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 4a6ad478-f4ec-4949-b947-25eaaca51e34
     m_ActionName: Player/Look[/Mouse/delta]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1494037587}
+        m_TargetAssemblyTypeName: PlayerInput, Assembly-CSharp
+        m_MethodName: OnDash
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 7b2adf36-f231-4ef8-823c-4931010358de
+    m_ActionName: Player/Dash[/Keyboard/leftShift]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Desktop
   m_DefaultActionMap: Player
@@ -1891,6 +1909,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 214d83e9258b9f34f83f046e0681375e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1494037595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1494037577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 447427bf9f9a7904494b47488f6acb18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1565995830
