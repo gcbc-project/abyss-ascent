@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class JumpingItem : Item
+public class StatItem : Item
 {
     [SerializeField] private StatSO _stat;
     private StatHandler _handler;
