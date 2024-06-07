@@ -3,7 +3,8 @@ using UnityEngine;
 public class PlayerAnime : MonoBehaviour
 {
     private readonly int _isWalk = Animator.StringToHash("isWalk");
-    private readonly int _jump = Animator.StringToHash("jump");
+    private readonly int _isJumping = Animator.StringToHash("isJumping");
+    private readonly int _jumpNum = Animator.StringToHash("jumpNum");
     private readonly int _isFalling = Animator.StringToHash("isFalling");
     private readonly int _isGrounded = Animator.StringToHash("isGrounded");
 
@@ -13,16 +14,20 @@ public class PlayerAnime : MonoBehaviour
     private void Start()
     {
         _animator = GetComponent<Animator>();
-        _playerJump = GetComponent<PlayerJump>();
         PlayerManager.Instance.Player.Input.OnMoveInputEvent += OnMove;
-        _playerJump.OnJumpEvent += OnJump;
-        _playerJump.OnFallingEvent += OnFalling;
-        _playerJump.OnGroundedEvent += OnGrounded;
+        PlayerManager.Instance.Player.Jump.OnJumpEvent += OnJump;
+        PlayerManager.Instance.Player.Jump.OnFallingEvent += OnFalling;
+        PlayerManager.Instance.Player.Jump.OnGroundedEvent += OnGrounded;
     }
 
-    private void OnJump()
+    private void OnJump(bool isJumping, int jumpNum)
     {
-        _animator.SetTrigger(_jump);
+        if (jumpNum > 1)
+        {
+            _animator.Play("Double Jump", -1, 0f);
+        }
+        _animator.SetBool(_isJumping, isJumping);
+        _animator.SetInteger(_jumpNum, jumpNum);
     }
     private void OnFalling(bool isFalling)
     {
