@@ -422,8 +422,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SceneIndex: 0
   GameScenes:
-  - StartTest
-  - MapReMake
+  - StartMap
+  - SideViewMap
   - Maze
   - ThirdViewMap
 --- !u!4 &140448672
