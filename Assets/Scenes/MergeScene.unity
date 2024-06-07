@@ -1007,7 +1007,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73e38766a6f70f6439558ba89aff09bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _slots: []
   _inventory: {fileID: 223414309}
   _slotPanel: {fileID: 1353658065}
   _selectedItemName: {fileID: 185258969}

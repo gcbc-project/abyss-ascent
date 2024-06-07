@@ -3,11 +3,13 @@ using UnityEngine.UI;
 
 public class ResourceSlot : MonoBehaviour
 {
-    public ResourceData _data;
-    public Inventory _inventory;
-    public Image _icon;
-    private Outline _outline;
-    public int _index;
+    [HideInInspector] public ResourceData Data;
+    [HideInInspector] public Inventory Inventory;
+    [HideInInspector] public int Idx;
+
+    [SerializeField] Image _icon;
+
+    Outline _outline;
 
     private void Awake()
     {
@@ -21,23 +23,23 @@ public class ResourceSlot : MonoBehaviour
 
     public void Set()
     {
-        if (_data != null)
+        if (Data != null)
         {
             _icon.gameObject.SetActive(true);
-            _icon.sprite = _data._resourceIcon;
+            _icon.sprite = Data._resourceIcon;
         }
     }
 
     public void Clear()
     {
-        _data = null;
+        Data = null;
         _icon.gameObject.SetActive(false);
         _outline.enabled = false;
     }
 
     public void OnClickButton()
     {
-        _inventory.SelectItem(_index);
+        Inventory.SelectItem(Idx);
     }
 
     public void EnableOutline()

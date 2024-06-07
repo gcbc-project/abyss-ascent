@@ -3,34 +3,28 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    public ResourceSlot[] _slots;
-    public GameObject _inventory;
-    public Transform _slotPanel;
-
-    private PlayerInput _playerInput;
+    ResourceSlot[] _slots;
+    [SerializeField] Transform _slotPanel;
 
     [Header("Selected Item")]
-    private ResourceSlot _selectedItem;
-    private int _selectedItemIndex;
-    public TMP_Text _selectedItemName;
-    public TMP_Text _selectedItemDescription;
+    ResourceSlot _selectedItem;
+    [SerializeField] TMP_Text _selectedItemName;
+    [SerializeField] TMP_Text _selectedItemDescription;
 
     private void Start()
     {
-        _playerInput = PlayerManager.Instance.Player.Input;
-
-        _playerInput.Oninventory += Toggle;
+        PlayerManager.Instance.Player.Input.Oninventory += Toggle;
         PlayerManager.Instance.Player.Input.OnAddResource += AddItem;
 
-        _inventory.SetActive(false);
+        gameObject.SetActive(false);
 
         _slots = new ResourceSlot[_slotPanel.childCount];
 
         for (int i = 0; i < _slots.Length; i++)
         {
             _slots[i] = _slotPanel.GetChild(i).GetComponent<ResourceSlot>();
-            _slots[i]._index = i;
-            _slots[i]._inventory = this;
+            _slots[i].Idx = i;
+            _slots[i].Inventory = this;
             _slots[i].Clear();
         }
 
@@ -43,17 +37,17 @@ public class Inventory : MonoBehaviour
         _selectedItemName.text = string.Empty;
     }
 
-    public void Toggle()
+    private void Toggle()
     {
-        _inventory.SetActive(!IsOpen());
+        gameObject.SetActive(!IsOpen());
     }
 
-    public bool IsOpen()
+    private bool IsOpen()
     {
-        return _inventory.activeInHierarchy;
+        return gameObject.activeInHierarchy;
     }
 
-    public void AddItem()
+    private void AddItem()
     {
         ResourceData resourceData = PlayerManager.Instance.Player.ResourceData;
         ResourceSlot emptySlot = GetemptySlot();
@@ -65,17 +59,17 @@ public class Inventory : MonoBehaviour
 
         if (emptySlot != null)
         {
-            emptySlot._data = resourceData;
+            emptySlot.Data = resourceData;
             UpdateUI();
             PlayerManager.Instance.Player.ResourceData = null;
         }
     }
 
-    ResourceSlot GetemptySlot()
+    private ResourceSlot GetemptySlot()
     {
         for (int i = 0; i < _slots.Length; i++)
         {
-            if (_slots[i]._data == null)
+            if (_slots[i].Data == null)
             {
                 return _slots[i];
             }
@@ -87,7 +81,7 @@ public class Inventory : MonoBehaviour
     {
         for (int i = 0; i < _slots.Length; i++)
         {
-            if (_slots[i]._data != null)
+            if (_slots[i].Data != null)
             {
                 _slots[i].Set();
             }
@@ -100,7 +94,7 @@ public class Inventory : MonoBehaviour
 
     public void SelectItem(int index)
     {
-        if (_slots[index]._data == null) return;
+        if (_slots[index].Data == null) return;
 
         if (_selectedItem == _slots[index])
         {
@@ -114,14 +108,13 @@ public class Inventory : MonoBehaviour
         }
 
         _selectedItem = _slots[index];
-        _selectedItemIndex = index;
 
-        _selectedItemName.text = _selectedItem._data._resourceName;
-        _selectedItemDescription.text = _selectedItem._data._resourceDescription;
+        _selectedItemName.text = _selectedItem.Data._resourceName;
+        _selectedItemDescription.text = _selectedItem.Data._resourceDescription;
         _selectedItem.EnableOutline();
     }
 
-    void ClearSelectedItemWindow()
+    private void ClearSelectedItemWindow()
     {
         if (_selectedItem != null)
         {
