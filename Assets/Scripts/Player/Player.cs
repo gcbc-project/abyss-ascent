@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     public PlayerMovement Movement { get; private set; }
     public PlayerJump Jump { get; private set; }
     public PlayerLook Look { get; private set; }
+    public PlayerDash Dash { get; private set; }
     [HideInInspector] public bool IsNotGrounded;
     private void Awake()
     {
@@ -18,5 +19,6 @@ public class Player : MonoBehaviour
         Movement = GetComponent<PlayerMovement>();
         Jump = GetComponent<PlayerJump>();
         Look = GetComponent<PlayerLook>();
+        Dash = GetComponent<PlayerDash>();
     }
 }
