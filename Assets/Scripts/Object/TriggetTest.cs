@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class TriggetTest : MonoBehaviour
 {
-    public LayerMask playerLayer;
+    public LayerMask PlayerLayer;
     Scene curScene;
     string curScenename;
     private void Start()
@@ -15,7 +15,7 @@ public class TriggetTest : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (1 << other.gameObject.layer == playerLayer)
+        if (1 << other.gameObject.layer == PlayerLayer)
         {
             SceneChangeManager.Instance.ActiveScene(curScenename);
         }

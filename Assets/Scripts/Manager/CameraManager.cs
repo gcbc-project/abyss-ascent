@@ -54,11 +54,11 @@ public class CameraManager : BaseSingleton<CameraManager>
         switch (type)
         {
             case ViewType.Top:
-                targetPosition = new Vector3(_playerTransform.position.x, 6, _playerTransform.position.z - 1);
+                targetPosition = new Vector3(_playerTransform.position.x, _playerTransform.position.y+6, _playerTransform.position.z - 1);
                 targetRotation = Quaternion.Euler(70, 0, 0);
                 break;
             case ViewType.SideScrolling:
-                targetPosition = new Vector3(_playerTransform.position.x, 0.5f + _playerTransform.position.y, -10);
+                targetPosition = new Vector3(_playerTransform.position.x, 0.5f + _playerTransform.position.y, _playerTransform.position.z - 10);
                 targetRotation = Quaternion.Euler(0, 0, 0);
                 break;
             case ViewType.Third:
@@ -95,12 +95,12 @@ public class CameraManager : BaseSingleton<CameraManager>
         if (ViewType == ViewType.Top)
         {
             _camera.transform.rotation = Quaternion.Euler(70, 0, 0);
-            _camera.transform.position = new Vector3(_playerTransform.position.x, 6, _playerTransform.position.z - 1);
+            _camera.transform.position = new Vector3(_playerTransform.position.x, _playerTransform.position.y+ 6, _playerTransform.position.z - 1);
         }
         else if (ViewType == ViewType.SideScrolling)
         {
             _camera.transform.rotation = Quaternion.Euler(0, 0, 0);
-            _camera.transform.position = new Vector3(_playerTransform.position.x, 0.5f + _playerTransform.position.y, -10);
+            _camera.transform.position = new Vector3(_playerTransform.position.x, 0.5f + _playerTransform.position.y, _playerTransform.position.z- 10);
         }
     }
 }
