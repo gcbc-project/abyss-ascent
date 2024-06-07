@@ -87,5 +87,4 @@ public class StatSO : ScriptableObject
 
     this.ClimbSpeed *= other.ClimbSpeed;
   }
->>>>>>> dev
 }
