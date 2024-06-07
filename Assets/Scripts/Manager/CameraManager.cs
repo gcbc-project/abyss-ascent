@@ -18,6 +18,8 @@ public class CameraManager : BaseSingleton<CameraManager>
     private Transform _playerTransform;
     private Coroutine _currentSwitchCoroutine;
     private bool _isSwitchingView;
+    private float _distance = 4.0f;
+    private float _yOffset = 1.0f;
     public bool _canLook { get; private set; } = true;
 
     private void Start()
@@ -55,15 +57,14 @@ public class CameraManager : BaseSingleton<CameraManager>
         switch (type)
         {
             case ViewType.Top:
-                targetPosition = new Vector3(_playerTransform.position.x, 6, _playerTransform.position.z - 1);
+                targetPosition = new Vector3(_playerTransform.position.x, _playerTransform.position.y + 6, _playerTransform.position.z - 1);
                 targetRotation = Quaternion.Euler(70, 0, 0);
                 break;
             case ViewType.SideScrolling:
-                targetPosition = new Vector3(_playerTransform.position.x, 0.5f + _playerTransform.position.y, -10);
+                targetPosition = new Vector3(_playerTransform.position.x, 0.5f + _playerTransform.position.y, _playerTransform.position.z - 10);
                 targetRotation = Quaternion.Euler(0, 0, 0);
                 break;
             case ViewType.Third:
-                targetPosition = new Vector3(_playerTransform.position.x, 4, _playerTransform.position.z - 2);
                 targetRotation = Quaternion.Euler(60, -2.6f, 0);
                 break;
         }
@@ -75,14 +76,31 @@ public class CameraManager : BaseSingleton<CameraManager>
         {
             elapsed += Time.deltaTime;
             float t = Mathf.Clamp01(elapsed / duration);
+
+            // 플레이어 위치를 지속적으로 반영하여 목표 위치 갱신
+            switch (type)
+            {
+                case ViewType.Top:
+                    targetPosition = new Vector3(_playerTransform.position.x, 6, _playerTransform.position.z - 1);
+                    break;
+                case ViewType.SideScrolling:
+                    targetPosition = new Vector3(_playerTransform.position.x, 0.5f + _playerTransform.position.y, -10);
+                    break;
+                case ViewType.Third:
+                    targetPosition = new Vector3(_playerTransform.position.x, 4, _playerTransform.position.z - 2);
+                    break;
+            }
+
             _camera.transform.position = Vector3.Lerp(startPosition, targetPosition, t);
             _camera.transform.rotation = Quaternion.Slerp(startRotation, targetRotation, t);
+
             yield return null;
         }
 
         _camera.transform.position = targetPosition;
         _camera.transform.rotation = targetRotation;
 
+        PlayerManager.Instance.Player.Look.InitializeCurrentRotation();
         _isSwitchingView = false;
     }
 
@@ -93,15 +111,26 @@ public class CameraManager : BaseSingleton<CameraManager>
             return;
         }
 
-        if (ViewType == ViewType.Top)
+        switch (ViewType)
         {
-            _camera.transform.rotation = Quaternion.Euler(70, 0, 0);
-            _camera.transform.position = new Vector3(_playerTransform.position.x, 6, _playerTransform.position.z - 1);
-        }
-        else if (ViewType == ViewType.SideScrolling)
-        {
-            _camera.transform.rotation = Quaternion.Euler(0, 0, 0);
-            _camera.transform.position = new Vector3(_playerTransform.position.x, 0.5f + _playerTransform.position.y, -10);
+            case ViewType.Top:
+                _camera.transform.rotation = Quaternion.Euler(70, 0, 0);
+                _camera.transform.position = new Vector3(_playerTransform.position.x, _playerTransform.position.y + 6, _playerTransform.position.z - 1);
+                break;
+            case ViewType.SideScrolling:
+                _camera.transform.rotation = Quaternion.Euler(0, 0, 0);
+                _camera.transform.position = new Vector3(_playerTransform.position.x, 0.5f + _playerTransform.position.y, _playerTransform.position.z - 10);
+                break;
+            case ViewType.Third:
+                if (PlayerManager.Instance.Player.Look.CameraRotation != null)
+                {
+                    Vector3 position = PlayerManager.Instance.Player.Look.CameraRotation * new Vector3(0.0f, 0.0f, -_distance) + _playerTransform.position;
+                    position.y += _yOffset;
+
+                    _camera.transform.rotation = PlayerManager.Instance.Player.Look.CameraRotation;
+                    _camera.transform.position = position;
+                }
+                break;
         }
     }
 

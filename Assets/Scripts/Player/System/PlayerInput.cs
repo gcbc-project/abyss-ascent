@@ -10,6 +10,7 @@ public class PlayerInput : MonoBehaviour
     public event Action OnInteractInputEvent;
     public Action OnAddResource;
     public Action Oninventory;
+    public event Action OnDashInputEvent;
 
     public void OnMove(InputAction.CallbackContext context)
     {
@@ -54,10 +55,18 @@ public class PlayerInput : MonoBehaviour
 
     public void OnInventory(InputAction.CallbackContext context)
     {
-        if(context.phase == InputActionPhase.Started)
+        if (context.phase == InputActionPhase.Started)
         {
             Oninventory?.Invoke();
             CameraManager.Instance.ToggleCursor();
+        }
+    }
+
+    public void OnDash(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+        {
+            OnDashInputEvent?.Invoke();
         }
     }
 }

@@ -97,10 +97,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18d7370dada865f4fab84f4fec94ed6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 7
-  playerLayer:
+  _jumpForce: 300
+  _playerLayer:
     serializedVersion: 2
-    m_Bits: 16
+    m_Bits: 1024
 --- !u!65 &5341884233846282786
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -23,6 +23,14 @@ public class StatSO : ScriptableObject
   public float JumpPower;
   public int JumpNum;
 
+  [Header("Dash")]
+  public int DashStaminaAmount;
+  public float DashDuration;
+  public float DashDistance;
+
+  [Header("Climb")]
+  public float ClimbSpeed;
+
   public StatSO DeepCopy()
   {
     return Instantiate(this);
@@ -37,6 +45,12 @@ public class StatSO : ScriptableObject
     this.WalkSpeed += other.WalkSpeed;
     this.JumpPower += other.JumpPower;
     this.JumpNum += other.JumpNum;
+
+    this.DashStaminaAmount += other.DashStaminaAmount;
+    this.DashDuration += other.DashDuration;
+    this.DashDistance += other.DashDistance;
+
+    this.ClimbSpeed += other.ClimbSpeed;
   }
 
   public void Multiply(StatSO other)
@@ -48,5 +62,11 @@ public class StatSO : ScriptableObject
     this.WalkSpeed *= other.WalkSpeed;
     this.JumpPower *= other.JumpPower;
     this.JumpNum *= other.JumpNum;
+
+    this.DashStaminaAmount *= other.DashStaminaAmount;
+    this.DashDuration *= other.DashDuration;
+    this.DashDistance *= other.DashDistance;
+
+    this.ClimbSpeed *= other.ClimbSpeed;
   }
 }
