@@ -8,6 +8,7 @@ public class PlayerInput : MonoBehaviour
     public event Action<Vector2> OnLookInputEvent;
     public event Action OnJumpInputEvent;
     public event Action OnInteractInputEvent;
+    public event Action OnDashInputEvent;
     public void OnMove(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Performed)
@@ -43,6 +44,14 @@ public class PlayerInput : MonoBehaviour
         if (context.phase == InputActionPhase.Started)
         {
             OnInteractInputEvent?.Invoke();
+        }
+    }
+
+    public void OnDash(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+        {
+            OnDashInputEvent?.Invoke();
         }
     }
 }
