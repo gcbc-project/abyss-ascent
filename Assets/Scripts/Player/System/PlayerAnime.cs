@@ -22,6 +22,10 @@ public class PlayerAnime : MonoBehaviour
 
     private void OnJump(bool isJumping, int jumpNum)
     {
+        if (jumpNum > 1)
+        {
+            _animator.Play("Double Jump", -1, 0f);
+        }
         _animator.SetBool(_jumping, isJumping);
         _animator.SetInteger(_jumpNum, jumpNum);
     }
