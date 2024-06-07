@@ -12,6 +12,7 @@ public enum ViewType
 public class CameraManager : BaseSingleton<CameraManager>
 {
     public ViewType ViewType { get; private set; }
+    public bool CanLook { get; private set; } = true;
     public event Action<ViewType> OnChangeView;
 
     private Camera _camera;
@@ -131,5 +132,12 @@ public class CameraManager : BaseSingleton<CameraManager>
                 }
                 break;
         }
+    }
+
+    public void ToggleCursor()
+    {
+        bool toggle = Cursor.lockState == CursorLockMode.Locked;
+        Cursor.lockState = toggle ? CursorLockMode.None : CursorLockMode.Locked;
+        CanLook = !toggle;
     }
 }

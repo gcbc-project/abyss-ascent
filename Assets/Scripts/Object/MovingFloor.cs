@@ -1,8 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class MovingFloor : MonoBehaviour,IMovingObject
+public class MovingFloor : MonoBehaviour, IMovingObject
 {
     [SerializeField] MoveDir dir;
     [SerializeField] float _moveSpeed;
@@ -29,9 +28,10 @@ public class MovingFloor : MonoBehaviour,IMovingObject
 
     void MoveDirection(MoveDir dir)
     {
-        switch(dir){
+        switch (dir)
+        {
             case MoveDir.MoveToX:
-                _endPosition = _startPosition + new Vector3(_moveDistance,0,0);
+                _endPosition = _startPosition + new Vector3(_moveDistance, 0, 0);
                 break;
             case MoveDir.MoveToY:
                 _endPosition = _startPosition + new Vector3(0, _moveDistance, 0);
@@ -41,7 +41,7 @@ public class MovingFloor : MonoBehaviour,IMovingObject
                 break;
         }
     }
-    
+
     public void Move(Vector3 targetPosition)
     {
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, _moveSpeed * Time.deltaTime);

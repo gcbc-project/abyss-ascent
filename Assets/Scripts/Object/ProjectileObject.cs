@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ProjectileObject : MonoBehaviour, IProjectileObject
@@ -18,7 +16,7 @@ public class ProjectileObject : MonoBehaviour, IProjectileObject
     #endregion
 
     public float MoveSpeed => ObjMoveSpeed;
-    
+
     public void SetDirection(Vector3 direction)
     {
 
@@ -35,7 +33,7 @@ public class ProjectileObject : MonoBehaviour, IProjectileObject
 
     private void OnTriggerEnter(Collider other)
     {
-        if(1 << other.gameObject.layer == _playerLayerMask)
+        if (1 << other.gameObject.layer == _playerLayerMask)
         {
             other.GetComponent<Health>().Modify(-10);
         }
@@ -47,5 +45,5 @@ public class ProjectileObject : MonoBehaviour, IProjectileObject
             ObjectPoolManager.Instance.ReturnPool("ProjectileObj", gameObject);
         }
     }
-    
+
 }
