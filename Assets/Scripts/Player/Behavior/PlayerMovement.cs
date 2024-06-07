@@ -6,18 +6,17 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 _direction;
     private Camera _camera;
     private Vector3 _beforeDirection;
-    private PlayerJump _playerJump;
 
     private void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
-        _playerJump = GetComponent<PlayerJump>();
         _camera = Camera.main;
         PlayerManager.Instance.Player.Input.OnMoveInputEvent += OnMove;
     }
 
     private void FixedUpdate()
     {
+        if (PlayerManager.Instance.Player.IsNotGrounded) return;
         Move();
     }
 
@@ -58,7 +57,6 @@ public class PlayerMovement : MonoBehaviour
         moveDirection *= PlayerManager.Instance.Player.Stat.CurrentStat.WalkSpeed;
         moveDirection.y = _rigidbody.velocity.y;
 
-        //_rigidbody.velocity = moveDirection;
         if (moveDirection != Vector3.zero)
         {
             _rigidbody.velocity = moveDirection;

@@ -48,6 +48,7 @@ public class PlayerJump : MonoBehaviour
 
         if (_numberOfJumps == 0) StartCoroutine(WaitForLanding());
 
+        PlayerManager.Instance.Player.IsNotGrounded = true;
         _rigidbody.AddForce(Vector2.up * PlayerManager.Instance.Player.Stat.CurrentStat.JumpPower, ForceMode.Impulse);
         if (!_isGrounded)
         {
@@ -61,6 +62,7 @@ public class PlayerJump : MonoBehaviour
         yield return new WaitUntil(() => !IsGrounded());
         yield return new WaitUntil(IsGrounded);
         _numberOfJumps = 0;
+        PlayerManager.Instance.Player.IsNotGrounded = false;
         OnJumpEvent?.Invoke(false, _numberOfJumps);
     }
 
