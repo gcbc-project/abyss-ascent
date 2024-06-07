@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerAnime : MonoBehaviour
 {
     private readonly int _isWalk = Animator.StringToHash("isWalk");
-    private readonly int _jumping = Animator.StringToHash("jumping");
+    private readonly int _isJumping = Animator.StringToHash("isJumping");
     private readonly int _jumpNum = Animator.StringToHash("jumpNum");
     private readonly int _isFalling = Animator.StringToHash("isFalling");
     private readonly int _isGrounded = Animator.StringToHash("isGrounded");
@@ -26,7 +26,7 @@ public class PlayerAnime : MonoBehaviour
         {
             _animator.Play("Double Jump", -1, 0f);
         }
-        _animator.SetBool(_jumping, isJumping);
+        _animator.SetBool(_isJumping, isJumping);
         _animator.SetInteger(_jumpNum, jumpNum);
     }
     private void OnFalling(bool isFalling)
