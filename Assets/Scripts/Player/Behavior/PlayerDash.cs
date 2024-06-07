@@ -1,78 +1,57 @@
+using System;
+using System.Collections;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-public class DodgeDash : MonoBehaviour
+public class PlayerDash : MonoBehaviour
 {
-    [SerializeField] private float _dashDistance = 5f;
-    [SerializeField] private float _dashDuration = 0.5f;
-    [SerializeField] private float _dashCooldown = 1f;
-    //private Animator _animator;
+    public event Action<bool> OnDashEvent;
     private bool _isDashing = false;
-    private bool _canDash = true;
-    private bool _isMoving = false; // 플레이어가 움직이고 있는지 여부
-    private Vector3 _dashDirection;
-    private InputAction _dashAction;
-    private InputAction _moveAction;
+    private Vector2 _moveDirection;
+    private Stamina _stamina;
 
-    private void Awake()
+    private void Start()
     {
-        _dashAction = new InputAction("Dodge", InputActionType.Button, "<Keyboard>/leftShift"); // 왼쪽 쉬프트 키와 연결
-        _moveAction = new InputAction("Move", InputActionType.Value, "<Keyboard>/w");
-        _moveAction.AddCompositeBinding("2DVector")
-            .With("Up", "<Keyboard>/w")
-            .With("Down", "<Keyboard>/s")
-            .With("Left", "<Keyboard>/a")
-            .With("Right", "<Keyboard>/d");
-                                                                                                
-        _dashAction.Enable();
-        _moveAction.Enable();
-
-        _dashAction.started += ctx => StartDashing(ctx);
-        _moveAction.performed += ctx => UpdateMovementState(ctx);
-        _moveAction.canceled += ctx => UpdateMovementState(ctx);
+        _stamina = GetComponent<Stamina>();
+        PlayerManager.Instance.Player.Input.OnDashInputEvent += OnDash;
+        PlayerManager.Instance.Player.Input.OnMoveInputEvent += SetMoveDirection;
     }
 
-    private void OnDestroy()
+    private void OnDash()
     {
-        _dashAction.Disable();
-        _moveAction.Disable();
+        if (_isDashing) return;
+        if (!_stamina.Modify(-PlayerManager.Instance.Player.Stat.CurrentStat.DashStaminaAmount)) return;
+
+        StartCoroutine(DashCoroutine());
     }
 
-    private void Update()
+    private IEnumerator DashCoroutine()
     {
-        if (_isDashing)
+        _isDashing = true;
+        OnDashEvent?.Invoke(_isDashing);
+
+        float elapsedTime = 0f;
+        Vector3 initialPosition = transform.position;
+
+        Vector3 dashDirection = transform.forward;
+        if (CameraManager.Instance.ViewType == ViewType.SideScrolling)
         {
-            // 애니메이션
-
-            transform.position += _dashDirection * _dashDistance * Time.deltaTime / _dashDuration;
+            dashDirection = new Vector3(_moveDirection.x, 0, 0);
         }
-    }
 
-    private void StartDashing(InputAction.CallbackContext context)
-    {
-        if (!_isDashing && _canDash && _isMoving && context.started)
+        while (elapsedTime < PlayerManager.Instance.Player.Stat.CurrentStat.DashDuration)
         {
-            _isDashing = true;
-            _canDash = false;
-            _dashDirection = transform.forward;
-            Invoke("StopDashing", _dashDuration);
-            Invoke("ResetDash", _dashCooldown);
+            float t = elapsedTime / PlayerManager.Instance.Player.Stat.CurrentStat.DashDuration;
+            transform.position = Vector3.Lerp(initialPosition, initialPosition + dashDirection * PlayerManager.Instance.Player.Stat.CurrentStat.DashDistance, t);
+            elapsedTime += Time.deltaTime;
+            yield return null;
         }
-    }
 
-    private void StopDashing()
-    {
         _isDashing = false;
+        OnDashEvent?.Invoke(_isDashing);
     }
 
-    private void ResetDash()
+    private void SetMoveDirection(Vector2 direction)
     {
-        _canDash = true;
-    }
-
-    private void UpdateMovementState(InputAction.CallbackContext context)
-    {
-        Vector2 movementInput = context.ReadValue<Vector2>();
-        _isMoving = movementInput != Vector2.zero;
+        _moveDirection = direction;
     }
 }
