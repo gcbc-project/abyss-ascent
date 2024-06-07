@@ -8,6 +8,7 @@ public class PlayerInput : MonoBehaviour
     public event Action<Vector2> OnLookInputEvent;
     public event Action OnJumpInputEvent;
     public event Action OnInteractInputEvent;
+    public Action AddResource;
     public void OnMove(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Performed)
