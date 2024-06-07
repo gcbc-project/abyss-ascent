@@ -18,6 +18,7 @@ public class CameraManager : BaseSingleton<CameraManager>
     private Transform _playerTransform;
     private Coroutine _currentSwitchCoroutine;
     private bool _isSwitchingView;
+    public bool _canLook { get; private set; } = true;
 
     private void Start()
     {
@@ -102,5 +103,12 @@ public class CameraManager : BaseSingleton<CameraManager>
             _camera.transform.rotation = Quaternion.Euler(0, 0, 0);
             _camera.transform.position = new Vector3(_playerTransform.position.x, 0.5f + _playerTransform.position.y, -10);
         }
+    }
+
+    public void ToggleCursor()
+    {
+        bool toggle = Cursor.lockState == CursorLockMode.Locked;
+        Cursor.lockState = toggle ? CursorLockMode.None : CursorLockMode.Locked;
+        _canLook = !toggle;
     }
 }

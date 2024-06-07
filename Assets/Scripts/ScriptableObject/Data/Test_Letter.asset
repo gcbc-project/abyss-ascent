@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Test_Letter
   m_EditorClassIdentifier: 
   _resourceName: Letter
-  _resourceDescription: No pain No gain
+  _resourceDescription: LetterDescription
   _resourceIcon: {fileID: -7511558181221131132, guid: 3d85efa72b1be994dacad3b55397e87f, type: 3}

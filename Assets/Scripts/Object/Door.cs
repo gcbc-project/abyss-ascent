@@ -6,13 +6,12 @@ public class Door : MonoBehaviour, IInteractable
 {
     public string GetInteractPrompt()
     {
-        string text = "Open door \n\n press 'E'";
-        string coloredText = text.Replace("E", "<color=#FF0000>E</color>");
-        return coloredText;
+        string str = "Door";
+        return str;
     }
 
     public void OnInteract()
     {
-        Debug.Log("도어와 상호 작용 합니다");
+        Debug.Log("상호 작용");
     }
 }
