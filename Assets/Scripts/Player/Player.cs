@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     public PlayerMovement Movement { get; private set; }
     public PlayerJump Jump { get; private set; }
     public PlayerLook Look { get; private set; }
-    public bool IsNotGrounded;
+    [HideInInspector] public bool IsNotGrounded;
     private void Awake()
     {
         PlayerManager.Instance.Player = this;
