@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class ResourceSlot : MonoBehaviour
 {
-    [HideInInspector] public ResourceData Data;
+    [HideInInspector] public ResourceSO Data;
     [HideInInspector] public Inventory Inventory;
     [HideInInspector] public int Idx;
 
@@ -26,7 +26,7 @@ public class ResourceSlot : MonoBehaviour
         if (Data != null)
         {
             _icon.gameObject.SetActive(true);
-            _icon.sprite = Data.ResourceIcon;
+            _icon.sprite = Data.Icon;
         }
     }
 

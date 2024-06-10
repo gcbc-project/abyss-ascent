@@ -13,7 +13,7 @@ public class Inventory : MonoBehaviour
 
     private void Start()
     {
-        PlayerManager.Instance.Player.Input.Oninventory += Toggle;
+        PlayerManager.Instance.Player.Input.OnInventoryInputEvent += Toggle;
         PlayerManager.Instance.Player.Input.OnAddResource += AddItem;
 
         gameObject.SetActive(false);
@@ -49,7 +49,7 @@ public class Inventory : MonoBehaviour
 
     private void AddItem()
     {
-        ResourceData resourceData = PlayerManager.Instance.Player.ResourceData;
+        ResourceSO resourceData = PlayerManager.Instance.Player.ResourceData;
         ResourceSlot emptySlot = GetemptySlot();
 
         if (resourceData == null)
@@ -109,8 +109,8 @@ public class Inventory : MonoBehaviour
 
         _selectedItem = _slots[index];
 
-        _selectedItemName.text = _selectedItem.Data.ResourceName;
-        _selectedItemDescription.text = _selectedItem.Data.ResourceDescription;
+        _selectedItemName.text = _selectedItem.Data.Name;
+        _selectedItemDescription.text = _selectedItem.Data.Description;
         _selectedItem.EnableOutline();
     }
 

@@ -3,37 +3,37 @@ using UnityEngine;
 
 public class PlayerInteractionUI : MonoBehaviour
 {
-    [SerializeField] GameObject UIContainer;
-    [SerializeField] TMP_Text PromptText;
+    [SerializeField] GameObject _uiContainer;
+    [SerializeField] TMP_Text _promptText;
 
     private void Start()
     {
         PlayerManager.Instance.Player.Interaction.OnInterectEnterEvent += OnInterectEnter;
         PlayerManager.Instance.Player.Interaction.OnInterectExitEvent += OnInterectExit;
         CameraManager.Instance.OnChangeView += SetUIPos;
-        UIContainer.SetActive(false);
+        _uiContainer.SetActive(false);
     }
 
     private void OnInterectEnter(IInteractable interactable)
     {
-        PromptText.text = interactable.GetInteractPrompt();
-        UIContainer.SetActive(true);
+        _promptText.text = interactable.GetInteractPrompt();
+        _uiContainer.SetActive(true);
     }
 
     private void OnInterectExit(IInteractable interactable)
     {
-        UIContainer.SetActive(false);
+        _uiContainer.SetActive(false);
     }
 
     private void SetUIPos(ViewType type)
     {
         if (type == ViewType.SideScrolling)
         {
-            UIContainer.transform.localPosition = new Vector3(160, 30, 0);
+            _uiContainer.transform.localPosition = new Vector3(160, 30, 0);
         }
         else
         {
-            UIContainer.transform.localPosition = new Vector3(240, -100, 0);
+            _uiContainer.transform.localPosition = new Vector3(240, -100, 0);
         }
     }
 }
