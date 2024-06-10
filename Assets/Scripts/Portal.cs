@@ -10,6 +10,8 @@ public class Portal : MonoBehaviour, IInteractable
     private TextMeshProUGUI _portalText;
     private LayerMask _layerMask;
 
+    [SerializeField] ViewType _changeViewType;
+
     private bool _isPlayerInRange = false;
 
     private void Awake()
@@ -50,6 +52,7 @@ public class Portal : MonoBehaviour, IInteractable
             if (Input.GetKeyDown(KeyCode.Y))
             {
                 Teleport();
+                CameraManager.Instance.SetView(_changeViewType);
                 PortalNotice.SetActive(false);
                 yield break;
             }
