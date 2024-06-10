@@ -3,18 +3,17 @@ using UnityEngine;
 
 public class ResourceObject : MonoBehaviour, IInteractable
 {
-    public ResourceData _data;
+    public ResourceSO Data;
 
-    public string GetInteractPrompt()
+    public virtual string GetInteractPrompt()
     {
-        string str = $"{_data.ResourceName}";
+        string str = $"{Data.Name}";
         return str;
     }
 
-    public void OnInteract()
+    public virtual void OnInteract()
     {
-        PlayerManager.Instance.Player.ResourceData = _data;
-        PlayerManager.Instance.Player.Input.OnAddResource?.Invoke();
+        PlayerManager.Instance.Player.Input.OnAddResource?.Invoke(Data);
         Destroy(gameObject);
     }
 }

@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 897c8a03733162440bb5d05e941f1cc3, type: 3}
-  m_Name: Test_Letter
+  m_Script: {fileID: 11500000, guid: 1a8d527900364354aba2c75181e8135d, type: 3}
+  m_Name: ResourceKey_Stage01
   m_EditorClassIdentifier: 
-  Name: letter
-  Description: this is letter
-  Icon: {fileID: 21300000, guid: a114306f81893174297e5055c8b3c9c2, type: 3}
+  Name: "\uBC29 \uC5F4\uC1E0"
+  Description: "\uBC29 \uC5F4\uC1E0\uB2E4"
+  Icon: {fileID: 21300000, guid: 070f26413be32ed49bb3aac989a2eb5a, type: 3}
+  KeyId: 1

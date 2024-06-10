@@ -5,7 +5,9 @@ public class Player : MonoBehaviour
 
     public StatHandler Stat { get; private set; }
     public PlayerInput Input { get; private set; }
-    public ResourceData ResourceData { get; set; }
+    public PlayerInteraction Interaction { get; private set; }
+    public PlayerInventory Inventory { get; private set; }
+    public ResourceSO ResourceData { get; set; }
 
     public PlayerMovement Movement { get; private set; }
     public PlayerJump Jump { get; private set; }
@@ -19,6 +21,8 @@ public class Player : MonoBehaviour
     {
         PlayerManager.Instance.Player = this;
         Input = GetComponent<PlayerInput>();
+        Interaction = GetComponent<PlayerInteraction>();
+        Inventory = GetComponent<PlayerInventory>();
         Stat = GetComponent<StatHandler>();
 
         Movement = GetComponent<PlayerMovement>();
