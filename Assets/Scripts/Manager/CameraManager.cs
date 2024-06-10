@@ -77,7 +77,7 @@ public class CameraManager : BaseSingleton<CameraManager>
             elapsed += Time.deltaTime;
             float t = Mathf.Clamp01(elapsed / duration);
 
-            // 플레이어 위치를 지속적으로 반영하여 목표 위치 갱신
+            // ?�레?�어 ?�치�?지?�적?�로 반영?�여 목표 ?�치 갱신
             switch (type)
             {
                 case ViewType.Top:
