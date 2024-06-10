@@ -17,7 +17,7 @@ public class PlayerInvnetoryUI : MonoBehaviour
     {
         _playerInventory = PlayerManager.Instance.Player.Inventory;
         PlayerManager.Instance.Player.Input.OnInventoryInputEvent += Toggle;
-        _playerInventory.OnInventroyChanged += UpdateInventoryUI;
+        _playerInventory.OnInventoryChanged += UpdateInventoryUI;
 
         CreateSlotUIs();
         _playerInventory.InitializeSlots();

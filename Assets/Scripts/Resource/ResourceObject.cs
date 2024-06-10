@@ -5,13 +5,13 @@ public class ResourceObject : MonoBehaviour, IInteractable
 {
     public ResourceSO Data;
 
-    public string GetInteractPrompt()
+    public virtual string GetInteractPrompt()
     {
         string str = $"{Data.Name}";
         return str;
     }
 
-    public void OnInteract()
+    public virtual void OnInteract()
     {
         PlayerManager.Instance.Player.Input.OnAddResource?.Invoke(Data);
         Destroy(gameObject);

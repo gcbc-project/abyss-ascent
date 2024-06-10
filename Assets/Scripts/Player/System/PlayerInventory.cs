@@ -3,11 +3,10 @@ using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
 {
-    public event Action OnInventroyChanged;
+    public event Action OnInventoryChanged;
 
     public InventorySlot[] Slots { get; set; }
     public int SlotCount { get; private set; } = 3;
-    ResourceSO _resourceData;
 
     private void Start()
     {
@@ -36,7 +35,22 @@ public class PlayerInventory : MonoBehaviour
         if (emptySlot != null)
         {
             emptySlot.Data = data;
-            OnInventroyChanged?.Invoke();
+            OnInventoryChanged?.Invoke();
+        }
+    }
+
+    public void RemoveItem(ResourceSO data)
+    {
+        if (data == null) return;
+
+        for (int i = 0; i < Slots.Length; i++)
+        {
+            if (Slots[i].Data == data)
+            {
+                Slots[i].Clear();
+                OnInventoryChanged?.Invoke();
+                return;
+            }
         }
     }
 
