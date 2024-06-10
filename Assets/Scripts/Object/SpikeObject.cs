@@ -34,17 +34,22 @@ public class SpikeObject : MonoBehaviour, IDamageObject
             _isPlayerDamage = true;
         }
     }
+    private void OnCollisionExit(Collision collision)
+    {
+        if (1 << collision.gameObject.layer == PlayerLayerMask)
+        {
+            _player = null;
+            _isPlayerDamage = false;
+        }
+    }
 
     public void CheckPlayer()
     {
+        
         if (_isPlayerDamage == true)
         {
             _player.GetComponent<Health>().Modify(-SpikeDamage);
         }
-        _isPlayerDamage = false;
     }
-    public void AnimStart()
-    {
-        _isPlayerDamage = false;
-    }
+    
 }
