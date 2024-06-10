@@ -1,7 +1,11 @@
+using System;
 using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
 {
+    public Action<IInteractable> OnInterectEnterEvent;
+    public Action<IInteractable> OnInterectExitEvent;
+
     private LayerMask _layerMask;
     private IInteractable _interactable;
     private GameObject _interactingGameObject;
@@ -21,12 +25,13 @@ public class PlayerInteraction : MonoBehaviour
         {
             _lastInteractTime = Time.time;
 
-            if (((1 << other.gameObject.layer) & _layerMask) != 0) // ��Ʈ ����Ʈ ���� (<<)
+            if (((1 << other.gameObject.layer) & _layerMask) != 0)
             {
                 if (other.gameObject != _interactingGameObject)
                 {
                     _interactingGameObject = other.gameObject;
                     _interactable = other.GetComponent<IInteractable>();
+                    OnInterectEnterEvent.Invoke(_interactable);
                 }
             }
         }
@@ -36,6 +41,7 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (other.gameObject == _interactingGameObject)
         {
+            OnInterectExitEvent.Invoke(_interactable);
             ClearInteraction();
         }
     }
@@ -52,6 +58,7 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (_interactable != null)
         {
+            OnInterectExitEvent.Invoke(_interactable);
             _interactable.OnInteract();
             _interactingGameObject = null;
             _interactable = null;
