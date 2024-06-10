@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 897c8a03733162440bb5d05e941f1cc3, type: 3}
   m_Name: Test_Letter
   m_EditorClassIdentifier: 
-  ResourceName: "\uD3B8\uC9C0"
-  ResourceDescription: "\uD3B8\uC9C0\uC785\uB2C8\uB2E4."
-  ResourceIcon: {fileID: 21300000, guid: a114306f81893174297e5055c8b3c9c2, type: 3}
+  Name: letter
+  Description: this is letter
+  Icon: {fileID: 21300000, guid: a114306f81893174297e5055c8b3c9c2, type: 3}

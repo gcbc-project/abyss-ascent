@@ -1,23 +1,38 @@
-using System;
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PlayerInvnetoryUI : MonoBehaviour
 {
     [SerializeField] GameObject _uiContainer;
-    [SerializeField] GameObject _slotContainer;
+    [SerializeField] Transform _slotContainer;
     [SerializeField] GameObject _slotPrefab;
     private PlayerInventory _playerInventory;
+    private List<InventorySlotUI> _slotUIs = new List<InventorySlotUI>();
+    private InventorySlotUI _selectedSlot;
+    [SerializeField] TMP_Text _selectedItemName;
+    [SerializeField] TMP_Text _selectedItemDescription;
 
     private void Start()
     {
         _playerInventory = PlayerManager.Instance.Player.Inventory;
         PlayerManager.Instance.Player.Input.OnInventoryInputEvent += Toggle;
         _playerInventory.OnInventroyChanged += UpdateInventoryUI;
-        _uiContainer.SetActive(false);
 
+        CreateSlotUIs();
+        _playerInventory.InitializeSlots();
+
+        _uiContainer.SetActive(false);
+    }
+
+    private void CreateSlotUIs()
+    {
         for (int i = 0; i < _playerInventory.SlotCount; i++)
         {
-            Instantiate(_slotPrefab, _slotContainer.transform);
+            GameObject slotObject = Instantiate(_slotPrefab, _slotContainer);
+            InventorySlotUI slotUI = slotObject.GetComponent<InventorySlotUI>();
+            slotUI.InventoryUI = this;
+            _slotUIs.Add(slotUI);
         }
     }
 
@@ -26,9 +41,40 @@ public class PlayerInvnetoryUI : MonoBehaviour
         _uiContainer.SetActive(!_uiContainer.activeInHierarchy);
     }
 
-    private void UpdateInventoryUI(PlayerInventory inventory)
+    private void UpdateInventoryUI()
     {
-        throw new NotImplementedException();
-    }
+        InventorySlot[] slots = _playerInventory.Slots;
 
+        for (int i = 0; i < _slotUIs.Count; i++)
+        {
+            if (slots[i].Data != null)
+            {
+                _slotUIs[i].SetData(slots[i].Data);
+            }
+            else
+            {
+                _slotUIs[i].Clear();
+            }
+        }
+    }
+    public void SelectItem(InventorySlotUI slot)
+    {
+        if (slot.Data == null) return;
+
+        if (_selectedSlot == slot)
+        {
+            ClearSelectedItemWindow();
+            return;
+        }
+
+        _selectedSlot = slot;
+        _selectedItemName.text = _selectedSlot.Data.Name;
+        _selectedItemDescription.text = _selectedSlot.Data.Description;
+    }
+    private void ClearSelectedItemWindow()
+    {
+        _selectedSlot = null;
+        _selectedItemName.text = string.Empty;
+        _selectedItemDescription.text = string.Empty;
+    }
 }

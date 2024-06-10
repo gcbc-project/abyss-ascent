@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class InventorySlot : MonoBehaviour
+public class InventorySlot
 {
     [HideInInspector] public int Idx;
     [HideInInspector] public ResourceSO Data;
