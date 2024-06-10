@@ -4,7 +4,7 @@ using UnityEngine;
 public class ResourceData : ScriptableObject
 {
     [Header("Info")]
-    public string _resourceName;
-    public string _resourceDescription;
-    public Sprite _resourceIcon;
+    public string ResourceName;
+    public string ResourceDescription;
+    public Sprite ResourceIcon;
 }

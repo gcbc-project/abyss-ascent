@@ -26,7 +26,7 @@ public class ResourceSlot : MonoBehaviour
         if (Data != null)
         {
             _icon.gameObject.SetActive(true);
-            _icon.sprite = Data._resourceIcon;
+            _icon.sprite = Data.ResourceIcon;
         }
     }
 

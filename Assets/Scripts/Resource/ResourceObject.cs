@@ -7,7 +7,7 @@ public class ResourceObject : MonoBehaviour, IInteractable
 
     public string GetInteractPrompt()
     {
-        string str = $"{_data._resourceName}";
+        string str = $"{_data.ResourceName}";
         return str;
     }
 

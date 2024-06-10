@@ -109,8 +109,8 @@ public class Inventory : MonoBehaviour
 
         _selectedItem = _slots[index];
 
-        _selectedItemName.text = _selectedItem.Data._resourceName;
-        _selectedItemDescription.text = _selectedItem.Data._resourceDescription;
+        _selectedItemName.text = _selectedItem.Data.ResourceName;
+        _selectedItemDescription.text = _selectedItem.Data.ResourceDescription;
         _selectedItem.EnableOutline();
     }
 
