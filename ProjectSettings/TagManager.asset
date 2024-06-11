@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - ProjectileObj
+  - Item
   layers:
   - Default
   - TransparentFX
@@ -12,13 +14,13 @@ TagManager:
   - Water
   - UI
   - Ground
+  - Interactable
+  - TopView
+  - ThirdView
+  - Player
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Wall
   - 
   - 
   - 

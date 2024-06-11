@@ -18,6 +18,11 @@ public class StatHandler : MonoBehaviour
         _stats.Add(stat);
     }
 
+    public void SubStat(StatSO stat)
+    {
+        _stats.Remove(stat);
+    }
+
     public void UpdateStat()
     {
         CurrentStat = _baseStat.DeepCopy();
