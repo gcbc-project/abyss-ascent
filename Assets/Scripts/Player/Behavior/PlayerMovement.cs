@@ -71,4 +71,26 @@ public class PlayerMovement : MonoBehaviour
             return new Vector3(_direction.x, _direction.y, 0).normalized;
         }
     }
+
+    private void OnMovingFloor(Vector3 deltaMovement)
+    {
+        // 플레이어에 변위를 적용합니다.
+        transform.position += deltaMovement;
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        IMovingObject movingObject = collision.gameObject.GetComponent<IMovingObject>();
+        if (movingObject != null)
+        {
+            movingObject.MovingFloorEvent += OnMovingFloor;
+        }
+    }
+    private void OnCollisionExit(Collision collision)
+    {
+        IMovingObject movingObject = collision.gameObject.GetComponent<IMovingObject>();
+        if (movingObject != null)
+        {
+            movingObject.MovingFloorEvent -= OnMovingFloor;
+        }
+    }
 }

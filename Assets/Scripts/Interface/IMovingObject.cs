@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,4 +18,5 @@ public interface IMovingObject
     public float GetWaitTime();
     public void Move(Vector3 targetPosition);
     public bool IsAtPosition(Vector3 position);
+    public event Action<Vector3> MovingFloorEvent;
 }

@@ -27,7 +27,7 @@ public class Portal : MonoBehaviour, IInteractable
 
     public string GetInteractPrompt()
     {
-        return "Do you want to Teleport? (Y/N)";
+        return "포탈 이동 (Y/N)";
     }
 
     public void OnInteract()

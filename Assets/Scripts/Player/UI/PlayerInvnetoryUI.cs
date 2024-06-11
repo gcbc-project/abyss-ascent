@@ -39,6 +39,7 @@ public class PlayerInvnetoryUI : MonoBehaviour
     private void Toggle()
     {
         _uiContainer.SetActive(!_uiContainer.activeInHierarchy);
+        ClearSelectedItemWindow();
     }
 
     private void UpdateInventoryUI()

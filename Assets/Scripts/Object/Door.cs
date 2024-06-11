@@ -10,7 +10,7 @@ public class Door : MonoBehaviour, IInteractable
 
     public string GetInteractPrompt()
     {
-        return "Open the Door";
+        return "문 열기";
     }
 
     public void OnInteract()
@@ -32,7 +32,6 @@ public class Door : MonoBehaviour, IInteractable
 
     public void Open()
     {
-        Debug.Log("문열림");
         MoveDirection(dir); // 문을 열 때 지정된 방향으로 이동
     }
 
