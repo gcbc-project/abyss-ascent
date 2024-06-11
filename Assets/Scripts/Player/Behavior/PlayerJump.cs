@@ -10,7 +10,7 @@ public class PlayerJump : MonoBehaviour
 
     private LayerMask _groundLayerMask;
     private Rigidbody _rigidbody;
-    private float _radius = 0.1f;
+    private float _radius = 0.3f;
     private bool _isFalling;
     private bool _isGrounded;
     private int _numberOfJumps;
@@ -68,10 +68,17 @@ public class PlayerJump : MonoBehaviour
 
     private bool IsGrounded()
     {
-        Vector3 startPos = transform.position + Vector3.up * _radius;
+        // Position slightly above the player's feet
+        Vector3 startPos = transform.position + Vector3.up * _radius * 1.1f;
+
+        // Direction pointing downwards
         Vector3 direction = -Vector3.up;
 
-        if (Physics.SphereCast(startPos, _radius, direction, out RaycastHit hit, _radius, _groundLayerMask))
+        // Use a larger distance to cover the ground distance
+        float distance = _radius * 1.2f;
+
+        // Perform the sphere cast
+        if (Physics.SphereCast(startPos, _radius, direction, out RaycastHit hit, distance, _groundLayerMask))
         {
             return true;
         }
