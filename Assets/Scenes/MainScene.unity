@@ -13577,7 +13577,7 @@ MonoBehaviour:
   _pools:
   - Tag: ProjectileObj
     Prefap: {fileID: 592961332625210097, guid: c6cc77b60f693314ba7d40f302e3e102, type: 3}
-    Size: 5
+    Size: 30
     Parent: {fileID: 1740152133}
 --- !u!1 &1752954006
 GameObject:

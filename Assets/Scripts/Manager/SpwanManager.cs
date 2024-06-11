@@ -12,7 +12,7 @@ public struct SpwanPoint
 public class SpwanManager : BaseSingleton<SpwanManager>
 {
     [SerializeField] List<SpwanPoint> _spawnPoints = new List<SpwanPoint>();
-    int _currentPointIndex = 0;
+    int _currentPointIndex = -1;
 
     public void Spawn()
     {
