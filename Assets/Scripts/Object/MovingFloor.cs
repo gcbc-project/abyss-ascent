@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -10,11 +11,14 @@ public class MovingFloor : MonoBehaviour, IMovingObject
     private Vector3 _startPosition;
     private Vector3 _endPosition;
     private bool _movingToEnd = true;
+    private Vector3 _previousPosition; // 이전 위치 추적
+    public event Action<Vector3> MovingFloorEvent;
 
     void Start()
     {
         _startPosition = gameObject.transform.position;
         MoveDirection(dir);
+        _previousPosition = _startPosition; // 이전 위치 초기화
         StartCoroutine(MoveFloor());
     }
 
@@ -60,6 +64,11 @@ public class MovingFloor : MonoBehaviour, IMovingObject
             while (!IsAtPosition(targetPosition))
             {
                 Move(targetPosition);
+                Vector3 deltaMovement = transform.position - _previousPosition;
+                _previousPosition = transform.position;
+
+                // 플레이어에게 (있는 경우) 이동 변위 알림
+                MovingFloorEvent?.Invoke(deltaMovement);
                 yield return null;
             }
             yield return new WaitForSeconds(_waitTime);
