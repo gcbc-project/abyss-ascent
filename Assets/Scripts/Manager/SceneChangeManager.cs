@@ -48,7 +48,6 @@ public class SceneChangeManager : MonoBehaviour
         scene = SceneManager.GetSceneByName(GameScenes[SceneIndex + 2]);
         if (scene.IsValid())
         {
-            //���� �̹� Ȱ��ȭ �Ǿ�����
         }
         else
         {

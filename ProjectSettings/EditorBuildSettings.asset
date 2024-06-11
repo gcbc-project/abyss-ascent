@@ -6,9 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Map/MapTest.unity
-    guid: 0bec4264edb83ee4e82a4bf2f57bb083
-  - enabled: 1
     path: Assets/Scenes/Map/SideViewMap.unity
     guid: 2ca835672a2c703428c26a35d66c395f
   - enabled: 1
@@ -17,4 +14,19 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Map/Maze.unity
     guid: 4fda49af7f8d13c4eba5f4b43e2ce794
+  - enabled: 1
+    path: Assets/Scenes/Map/YkbMap01.unity
+    guid: c3e38b4b740db0646a1e7dbd6b78c7a2
+  - enabled: 1
+    path: Assets/Scenes/Map/StartMap.unity
+    guid: ea9123c9145c5e046a28c2d7c58a3144
+  - enabled: 1
+    path: Assets/Scenes/Map/LJHMap01Scene.unity
+    guid: 3b985a9fef8004e4998bf5524884c33d
+  - enabled: 1
+    path: Assets/Scenes/Map/Lih_Map_01.unity
+    guid: 47256eae5015a034cb30d57b7995c3d8
+  - enabled: 1
+    path: Assets/Scenes/Map/OI-Map-001.unity
+    guid: c4fc566619e6f8b4081499c918ceddd7
   m_configObjects: {}
