@@ -79,7 +79,7 @@ public class Portal : MonoBehaviour, IInteractable
         if ((_layerMask.value & (1 << other.gameObject.layer)) > 0)
         {
             _isPlayerInRange = true;
-            _interactingObject = other.gameObject;
+            _interactingObject = other.gameObject.transform.parent.gameObject;
         }
     }
 

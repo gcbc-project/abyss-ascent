@@ -19,23 +19,6 @@ public class MovingBlock : MonoBehaviour
         }
 
     }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            if (MovingBlockObj.transform.position.z < _startPosition.z + _moveToZ)
-            {
-                MovingBlockObj.transform.position = new Vector3(0, 0, MovingBlockObj.transform.position.z + _moveToZ);
-            }
-            if (MovingBlockObj2 != null)
-            {
-                if (MovingBlockObj2.transform.position.z < _startPosition_2.z + _moveToZ)
-                {                    
-                    MovingBlockObj2.transform.position = new Vector3(0, 0, MovingBlockObj2.transform.position.z + _moveToZ /2);
-                }
-            }
-        }
-    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -43,13 +26,13 @@ public class MovingBlock : MonoBehaviour
         {
             if (MovingBlockObj.transform.position.z < _startPosition.z + _moveToZ)
             {
-                MovingBlockObj.transform.position = new Vector3(0, 0, MovingBlockObj.transform.position.z + _moveToZ);
+                MovingBlockObj.transform.position = _startPosition + new Vector3(0, 0, _moveToZ);
             }
             if (MovingBlockObj2 != null)
             {
                 if (MovingBlockObj2.transform.position.z < _startPosition_2.z + _moveToZ)
                 {
-                    MovingBlockObj2.transform.position = new Vector3(0, 0, MovingBlockObj2.transform.position.z + _moveToZ / 2);
+                    MovingBlockObj2.transform.position = _startPosition + new Vector3(0, 0, _moveToZ / 2);
                 }
             }
         }
